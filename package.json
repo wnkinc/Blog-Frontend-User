@@ -1,0 +1,19 @@
+{
+  "name": "blog-frontend-user",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/wnkinc/Blog-Frontend-User.git"
+  },
+  "author": "wes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wnkinc/Blog-Frontend-User/issues"
+  },
+  "homepage": "https://github.com/wnkinc/Blog-Frontend-User#readme"
+}
