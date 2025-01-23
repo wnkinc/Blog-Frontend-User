@@ -16,12 +16,12 @@ app.use(express.static(path.join(__dirname, "public"))); // Serve static files l
 /**
  * -------------- ROUTES ----------------
  */
-// const indexRouter = require("./routes/indexRouter");
-// const authRouter = require("./routes/authRouter");
+const authRouter = require("./routes/auth.router");
+const dashboardRouter = require("./routes/dashboard.routes");
 // const profileRouter = require("./routes/profileRouter");
 
-// app.use("/", indexRouter); // Home and general routes
-// app.use("/auth", authRouter); // Login, signup, logout routes
+app.use("/auth", authRouter);
+app.use("/dashboard", dashboardRouter);
 // app.use("/profile", profileRouter); // User profile routes
 
 /**
@@ -41,7 +41,7 @@ app.use((err, req, res, next) => {
 /**
  * -------------- Server ----------------
  */
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Frontend user side is running at http://localhost:${PORT}`);
 });
