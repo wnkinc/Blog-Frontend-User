@@ -1,7 +1,11 @@
+// controllers/auth.controller.js
 const axios = require("axios");
 const qs = require("querystring");
 const jwt = require("jsonwebtoken");
 
+/**
+ * -------------- Cognito Callback ----------------
+ */
 async function handleCallback(req, res) {
   try {
     const { code } = req.query;
@@ -25,7 +29,7 @@ async function handleCallback(req, res) {
     // Log the decoded and mapped user information
     console.log("Mapped User Info for API:", userInfo);
 
-    // Call the API to create a user
+    // Call the API to Check/Create a user
     const response = await axios.post("http://localhost:8080/users", userInfo, {
       headers: {
         Authorization: `Bearer ${tokens.access_token}`, // Pass access token for authentication if needed
@@ -82,6 +86,8 @@ async function exchangeCodeForTokens(code) {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
     }
   );
+
+  console.log("Token exchange response:", response.data);
 
   return response.data;
 }

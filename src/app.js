@@ -43,5 +43,5 @@ app.use((err, req, res, next) => {
  */
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log(`Frontend user side is running at http://localhost:${PORT}`);
+  console.log(`Blog-Frontend-User - listening on port ${PORT}!`);
 });
