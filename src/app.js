@@ -16,11 +16,9 @@ app.use(express.static(path.join(__dirname, "public"))); // Serve static files l
 /**
  * -------------- ROUTES ----------------
  */
-const authRouter = require("./routes/auth.router");
 const dashboardRouter = require("./routes/dashboard.routes");
 // const profileRouter = require("./routes/profileRouter");
 
-app.use("/auth", authRouter);
 app.use("/dashboard", dashboardRouter);
 // app.use("/profile", profileRouter); // User profile routes
 
