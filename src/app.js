@@ -13,6 +13,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public"))); // Serve static files like CSS, JS, and images
 
+// cookie parser
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+
 /**
  * -------------- ROUTES ----------------
  */

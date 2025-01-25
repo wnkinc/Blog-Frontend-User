@@ -1,4 +1,3 @@
-// middleware/auth.middleware.js
 const axios = require("axios");
 
 async function verifyToken(req, res, next) {
@@ -7,32 +6,37 @@ async function verifyToken(req, res, next) {
     console.log("Outgoing Axios Request:");
     console.log("URL:", `${process.env.BLOG_API_BASE_URL}/auth/verify-token`);
     console.log("Method: GET");
-    console.log("Headers:", {
-      withCredentials: true, // Include cookies in the request
-    });
 
     // Send a request to your API's verify endpoint
     const response = await axios.get(
       `${process.env.BLOG_API_BASE_URL}/auth/verify-token`,
       {
         headers: {
-          Cookie: req.headers.cookie, // Forward the cookies to the backend API
+          Cookie: req.headers.cookie, // Forward cookies from the browser
         },
         withCredentials: true, // Include cookies in the request
       }
     );
 
-    // Log the response if successful
-    console.log("Request Successful:");
-    console.log("Status:", response.status);
-    console.log("Data:", response.data);
+    // Log the successful response
+    console.log("Token verification successful:");
+    console.log("Response Data:", response.data);
 
-    // If the response is successful, the token is valid
+    // Attach the user information to req.user
+    req.user = response.data.user; // Assuming backend returns { success: true, user: {...} }
+    req.user.access_token = req.cookies.access_token;
+
+    // Pass control to the next middleware or route handler
     next();
   } catch (error) {
     // Log the error details
-    console.error("Request Failed:", error.response?.data || error.message);
-    return false; // Or handle the error as needed (e.g., redirect to login)
+    console.error(
+      "Token verification failed:",
+      error.response?.data || error.message
+    );
+
+    // Send an unauthorized response
+    res.status(401).json({ error: "Unauthorized: Invalid or missing token" });
   }
 }
 
