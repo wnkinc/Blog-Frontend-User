@@ -1,10 +1,10 @@
-// routes/dashboard.routes.js
+// routes/profile.routes.js
 const express = require("express");
-const { loadDashboard } = require("../controllers/dashboard.controller");
+const { loadProfile } = require("../controllers/profile.controller");
 const { verifyToken } = require("../middleware/auth.middleware");
 
 const router = express.Router();
 
-router.get("/", verifyToken, loadDashboard);
+router.get("/", verifyToken, loadProfile);
 
 module.exports = router;
