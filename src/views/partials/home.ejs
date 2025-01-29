@@ -1,0 +1,12 @@
+<div class="feed">
+  <% posts.forEach(post => { %>
+  <div class="card">
+    <h2><a href="/post/<%= post.id %>"><%= post.title %></a></h2>
+    <p>By <%= post.author.username %> - <%= post.date %></p>
+    <div class="engagement">
+      <span>❤️ 1 </span>
+      <span>💬 <%= post.comments.length %></span>
+    </div>
+  </div>
+  <% }); %>
+</div>

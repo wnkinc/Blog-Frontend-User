@@ -5,6 +5,6 @@ const { verifyToken } = require("../middleware/auth.middleware");
 
 const router = express.Router();
 
-router.get("/", verifyToken, loadDashboard);
+router.get("/", loadDashboard);
 
 module.exports = router;

@@ -15,8 +15,8 @@ async function loadDashboard(req, res, next) {
     const { posts, meta } = response.data;
 
     // Render the homepage with posts and metadata
-    res.render("dashboard", {
-      title: "Dashboard",
+    res.render("layout", {
+      pageTitle: "Dashboard",
       description: "Welcome to your profile!",
       posts,
       meta,
