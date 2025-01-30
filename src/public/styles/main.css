@@ -13,9 +13,3 @@ li a {
   color: #666;
   text-decoration: none;
 }
-
-.container {
-  flex: 1; /* Allow the container to grow and fill available space */
-  display: flex;
-  margin: 20px;
-}
