@@ -1,6 +1,8 @@
+// app.js
 require("dotenv").config();
 const path = require("path");
 const express = require("express");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
@@ -11,10 +13,7 @@ app.set("views", path.join(__dirname, "views"));
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public"))); // Serve static files like CSS, JS, and images
-
-// cookie parser
-const cookieParser = require("cookie-parser");
+app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
 
 /**
@@ -31,22 +30,20 @@ app.use("/profile", profileRouter);
 /**
  * -------------- Error handling ----------------
  */
+// Error handling middleware
 app.use((err, req, res, next) => {
-  if (err) {
-    // Log the error stack
-    console.error("Error:", err.stack);
+  console.error("Error:", err.stack);
+  res.status(500).render("partials/error", {
+    title: "Server Error",
+    error: err,
+  });
+});
 
-    // Handle 500 (Server Error)
-    res.status(500).render("partials/error", {
-      title: "Server Error",
-      error: err,
-    });
-  } else {
-    // Handle 404 (Page Not Found)
-    res.status(404).render("partials/404", {
-      title: "Page Not Found",
-    });
-  }
+// 404 Handler - Placed AFTER all routes & middleware
+app.use((req, res) => {
+  res.status(404).render("partials/404", {
+    title: "Page Not Found",
+  });
 });
 
 /**

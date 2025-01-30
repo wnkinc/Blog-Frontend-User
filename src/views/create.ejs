@@ -25,31 +25,58 @@
 
     <!-- Create Post Container -->
     <main class="create-post-container">
-      <!-- Cover Image Button -->
-      <button class="add-cover-btn">+ Add Cover Image</button>
+      <form id="create-post-form" action="/create" method="POST">
+        <!-- Cover Image Button -->
+        <button type="button" class="add-cover-btn">+ Add Cover Image</button>
 
-      <!-- Post Title Input -->
-      <input type="text" class="post-title" placeholder="Post title..." />
+        <!-- Post Title Input -->
+        <input
+          type="text"
+          name="title"
+          class="post-title"
+          placeholder="Post title..."
+          required
+        />
 
-      <!-- TinyMCE Editor -->
-      <textarea id="post-editor"></textarea>
+        <!-- TinyMCE Editor -->
+        <textarea id="post-editor" name="content"></textarea>
 
-      <!-- Post Action Buttons -->
-      <div class="post-actions">
-        <button class="publish-btn">Publish</button>
-        <button class="save-draft-btn">Save Draft</button>
-        <button class="revert-btn">Revert New Changes</button>
-      </div>
+        <!-- Hidden Input for Status -->
+        <input type="hidden" name="status" id="post-status" value="draft" />
+
+        <!-- Post Action Buttons -->
+        <div class="post-actions">
+          <button
+            type="submit"
+            class="publish-btn"
+            onclick="setPostStatus('published')"
+          >
+            Publish
+          </button>
+          <button
+            type="submit"
+            class="save-draft-btn"
+            onclick="setPostStatus('draft')"
+          >
+            Save Draft
+          </button>
+          <button type="reset" class="revert-btn">Revert New Changes</button>
+        </div>
+      </form>
     </main>
 
     <!-- TinyMCE Initialization -->
     <script>
       tinymce.init({
         selector: "#post-editor",
-        plugins: "lists link image code",
+        plugins: "lists link image code textcolor",
         toolbar:
           "undo redo | bold italic | bullist numlist | link image | code",
       });
+
+      function setPostStatus(status) {
+        document.getElementById("post-status").value = status;
+      }
     </script>
   </body>
 </html>
