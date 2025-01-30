@@ -14,27 +14,49 @@ async function loadCreate(req, res, next) {
 async function createPost(req, res, next) {
   try {
     const { title, content, status } = req.body;
+    const sub = req.user.sub;
+    const accessToken = req.cookies.access_token; // Get token from cookies
 
-    if (!title || !content) {
-      return res.status(400).json({ error: "Title and content are required" });
+    if (!title || !content || !sub) {
+      return res
+        .status(400)
+        .json({ error: "Title, content, and sub are required." });
     }
 
-    // Send post data to backend API
-    const response = await axios.post(`${process.env.BACKEND_API_URL}/posts`, {
-      title,
-      content,
-      status, // 'published' or 'draft'
-      userId: req.user.id,
-    });
+    if (!accessToken) {
+      return res
+        .status(401)
+        .json({ error: "Unauthorized: No access token provided." });
+    }
 
+    // Backend API URL
+    const apiUrl = `${process.env.BLOG_API_BASE_URL}/posts`;
+
+    // Send post data to backend API with authentication token
+    const response = await axios.post(
+      apiUrl,
+      {
+        title,
+        content,
+        status,
+        sub,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Send access token in headers
+        },
+      }
+    );
+
+    // Redirect to post or dashboard based on status
     if (status === "published") {
-      res.redirect(`/post/${response.data.id}`); // Redirect to the published post
+      res.redirect(`/post/${response.data.slug}`); // Redirect to published post
     } else {
       res.redirect("/dashboard"); // Redirect to drafts list
     }
   } catch (error) {
-    console.error("Error creating post:", error);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("Error creating post:", error.message);
+    next(error); // Pass error to Express error handler
   }
 }
 
