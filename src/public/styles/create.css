@@ -1,17 +1,83 @@
 /* Make sure the body and main container fill the full height */
-html,
-body {
+html {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 100%;
   margin: 0;
   padding: 0;
   overflow: hidden; /* Prevent unwanted scrolling */
 }
 
+body {
+  width: 100%;
+  max-width: 850px;
+  margin: 0;
+  padding: 0;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.15);
+}
+
+.header,
+.post-actions {
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.header {
+  background-color: #b5b2b2;
+}
+
+/* General Button Styling */
+button {
+  background-color: transparent; /* No solid background */
+  color: #007bff; /* Blue text color */
+  border: none;
+  padding: 9.5px 16px;
+  font-size: 14px;
+  border: 1px solid #007bff;
+  cursor: pointer;
+  border-radius: 7px;
+  transition: all 0.2s ease-in-out;
+  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  background-color: #007bff; /* Use text color as background */
+  color: #ffffff; /* White text */
+  border-color: #007bff; /* Keep border same as background */
+  text-decoration: underline; /* Underline text */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.add-cover-btn {
+  align-self: center;
+}
+
+.post-title {
+  background-color: aquamarine;
+  font-size: 3rem; /* Large text */
+  font-weight: bold; /* Bold text */
+  padding: 10px; /* Add some spacing */
+  border: none; /* Remove border */
+  outline: none; /* Prevent focus outline */
+  color: #888;
+}
+
+.post-title::placeholder {
+  font-size: 3rem; /* Match input text size */
+  font-weight: bold; /* Make placeholder bold */
+  color: #888; /* Slightly gray for readability */
+}
+
 /* Ensure the main content area stretches to fit */
 .create-post-container {
+  background-color: aquamarine;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 60px); /* Adjust based on header height */
+  height: calc(100vh - 60px);
 }
 
 /* The form should fill available space */
@@ -23,8 +89,9 @@ body {
 
 /* Editor container should stretch */
 .editor-container {
-  position: absolute;
-  top: 60px; /* Adjust for header */
+  background-color: white;
+  flex: 1;
+  top: 100px; /* Adjust for header */
   bottom: 0;
   left: 0;
   right: 0;
@@ -38,6 +105,10 @@ body {
   width: 100% !important;
   height: 100% !important;
   max-height: 100% !important;
+}
+
+.tox-tinymce {
+  border-radius: 0 !important;
 }
 
 .tox .tox-editor-container {

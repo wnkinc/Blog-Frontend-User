@@ -18,7 +18,6 @@
         <a href="/">Tech Trails</a>
       </div>
       <div class="post-controls">
-        <button class="tab-btn" id="edit-tab">Edit</button>
         <button class="tab-btn" id="preview-tab">Preview</button>
         <button class="close-btn" id="close-btn">X</button>
       </div>
@@ -63,29 +62,15 @@
           >
             Save Draft
           </button>
-          <button type="reset" class="revert-btn">Revert New Changes</button>
         </div>
       </form>
     </main>
 
     <!-- TinyMCE Initialization -->
     <script>
-      function adjustEditorHeight() {
-        const editor = tinymce.get("post-editor");
-        if (editor) {
-          const editorContainer = document.querySelector(".editor-container");
-          if (editorContainer) {
-            let newHeight =
-              window.innerHeight -
-              editorContainer.getBoundingClientRect().top -
-              20;
-            editor.theme.resizeTo("100%", newHeight);
-          }
-        }
-      }
-
       tinymce.init({
         selector: "#post-editor",
+        placeholder: "Write your post content here...",
         plugins: "lists link image code textcolor autosave",
         toolbar:
           "undo redo | bold italic | bullist numlist | link image | code | restoredraft",
@@ -99,18 +84,6 @@
         autosave_interval: "10s", // Save every 30 seconds
         autosave_retention: "30m", // Retain autosaved data for 30 minutes
       });
-
-      window.addEventListener("resize", () => {
-        const editor = tinymce.get("post-editor");
-        if (editor) {
-          // Example: resize to 80% of current window height
-          // or any formula you like
-          editor.theme.resizeTo("100%", window.innerHeight * 0.8);
-        }
-      });
-
-      // Adjust height dynamically on window resize
-      window.addEventListener("resize", adjustEditorHeight);
 
       function setPostStatus(status) {
         document.getElementById("post-status").value = status;
