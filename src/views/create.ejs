@@ -1,12 +1,55 @@
-<!-- profile.ejs -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= pageTitle %></title>
+    <title>Create Post - Tech Trails</title>
+    <!-- TinyMCE CDN -->
+    <script
+      src="https://cdn.tiny.cloud/1/<%= tinyMCEApiKey %>/tinymce/7/tinymce.min.js"
+      referrerpolicy="origin"
+    ></script>
   </head>
   <body>
-    <h1><%= pageTitle %></h1>
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <a href="/">Tech Trails</a>
+      </div>
+      <div class="post-controls">
+        <button class="tab-btn" id="edit-tab">Edit</button>
+        <button class="tab-btn" id="preview-tab">Preview</button>
+        <button class="close-btn" id="close-btn">X</button>
+      </div>
+    </header>
+
+    <!-- Create Post Container -->
+    <main class="create-post-container">
+      <!-- Cover Image Button -->
+      <button class="add-cover-btn">+ Add Cover Image</button>
+
+      <!-- Post Title Input -->
+      <input type="text" class="post-title" placeholder="Post title..." />
+
+      <!-- TinyMCE Editor -->
+      <textarea id="post-editor"></textarea>
+
+      <!-- Post Action Buttons -->
+      <div class="post-actions">
+        <button class="publish-btn">Publish</button>
+        <button class="save-draft-btn">Save Draft</button>
+        <button class="revert-btn">Revert New Changes</button>
+      </div>
+    </main>
+
+    <!-- TinyMCE Initialization -->
+    <script>
+      tinymce.init({
+        selector: "#post-editor",
+        plugins: "lists link image code",
+        toolbar:
+          "undo redo | bold italic | bullist numlist | link image | code",
+      });
+    </script>
   </body>
 </html>
