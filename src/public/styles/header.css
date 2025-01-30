@@ -1,3 +1,4 @@
+/************* Header & Navbar *************/
 .header {
   background-color: #fff; /* White background */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Slight lift effect */
@@ -11,6 +12,7 @@
   align-items: center;
 }
 
+/* Navigation Links */
 .nav-links {
   list-style: none;
   display: flex;
@@ -20,15 +22,29 @@
   padding: 0;
 }
 
-li a {
-  color: #666;
-  text-decoration: none;
+/************* Create Post Button *************/
+.btn-create-account {
+  display: inline-block;
+  background-color: transparent; /* No solid background */
+  color: #007bff; /* Blue text color */
+  padding: 9.5px 16px; /* Padding for the button */
+  font-size: 14px; /* Font size */
+  text-decoration: none; /* Remove underline */
+  border: 1px solid #007bff; /* Blue outline */
+  border-radius: 7px; /* Rounded corners */
+  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  white-space: nowrap; /* Prevents text from wrapping */
 }
 
-.nav-links li a:hover {
-  color: #007bff; /* Darker blue on hover */
+/* Hover Effect */
+.btn-create-account:hover {
+  background-color: #007bff; /* Use text color as background */
+  color: #ffffff; /* White text */
+  border-color: #007bff; /* Keep border same as background */
+  text-decoration: underline; /* Underline text */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
-
+/************* Search Bar *************/
 .search-bar {
   position: relative;
   flex-grow: 1;
@@ -39,20 +55,20 @@ li a {
 
 .search-bar input {
   width: 100%;
-  padding: 8px 12px;
+  padding: 9.5px 12px;
   border: 1px solid #ccc;
-  border-radius: 10px;
+  border-radius: 7px;
   font-size: 14px;
   transition: all 0.3s ease;
   color: #666;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle default shadow */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle default shadow */
 }
 
 .search-bar input:focus {
-  outline: none; /* Remove default outline*/
-  border-color: #007bff; /* Blue border on focus */
-  border-width: 1px; /* Slightly thicker border */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Consistent with the button shadow */
+  outline: none;
+  border-color: #007bff;
+  border-width: 1px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .search-bar .clear-btn {
@@ -71,29 +87,78 @@ li a {
 }
 
 .search-bar .clear-btn:hover {
-  color: #007bff; /* Optional: Change color on hover */
+  color: #007bff;
 }
 
-.btn-create-account {
-  display: inline-block;
-  background-color: transparent; /* No solid background */
-  color: #007bff; /* Blue text color */
-  padding: 8px 16px; /* Padding for the button */
-  font-size: 14px; /* Font size */
-  text-decoration: none; /* Remove underline */
-  border: 1px solid #007bff; /* Blue outline */
-  border-radius: 10px; /* Rounded corners */
-  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+/************* Notification Icon *************/
+/* Notification Container (Light Gray Box) */
+.notification-container {
+  background-color: #f1f1f1; /* Light gray background */
+  border-radius: 7px; /* Rounded corners */
+  padding: 8px; /* Space around the icon */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px; /* Box size */
+  height: 22px;
+  position: relative; /* Keeps badge positioned correctly */
+  transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
-.btn-create-account:hover {
-  color: #0056b3; /* Darker blue text on hover */
-  border-color: #0056b3; /* Matching darker blue outline */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow on hover */
+.notification-icon {
+  position: relative;
+  cursor: pointer;
+  font-size: 22px;
+  top: 2px; /* Moves icon down */
 }
 
-.btn-create-account:active {
-  color: #004494; /* Even darker blue text for active state */
-  border-color: #004494; /* Matching darker outline for active state */
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); /* Inner shadow for active state */
+.notification-icon svg {
+  stroke: #383838; /* Outline color (for stroke-based SVGs) */
+  fill: none; /* No fill color by default */
+}
+
+/* Change icon color on hover */
+.notification-container:hover .notification-icon svg {
+  stroke: #007bff; /* Blue color on hover */
+  transform: scale(1.05);
+}
+
+.notification-badge {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  padding: 3px 6px;
+  border-radius: 50%;
+  display: none; /* Initially hidden */
+}
+
+/************* Profile Icon *************/
+/* Profile Icon as a Circular Image */
+.profile-icon {
+  width: 34px; /* Adjust size as needed */
+  height: 34px;
+  border-radius: 50%; /* Ensures it's a perfect circle */
+  object-fit: cover; /* Prevents stretching */
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Hover Effect */
+.profile-icon:hover {
+  opacity: 0.8;
+  transform: scale(1.05); /* Slight zoom-in effect */
+}
+
+/* Optional: Add a subtle border */
+.profile-icon {
+  border: 2px solid #ddd; /* Light gray border */
+}
+
+.nav-item a {
+  display: flex;
+  align-items: center; /* Ensures the image stays proportional */
+  justify-content: center;
 }
