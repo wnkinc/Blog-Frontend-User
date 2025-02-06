@@ -27,7 +27,20 @@
     <main class="create-post-container">
       <form id="create-post-form" action="/create" method="POST">
         <!-- Cover Image Button -->
-        <button type="button" class="add-cover-btn">+ Add Cover Image</button>
+        <button type="button" class="add-cover-btn" id="add-cover-btn">
+          + Add Cover Image
+        </button>
+
+        <!-- Hidden File Input -->
+        <input
+          type="file"
+          id="cover-image-input"
+          accept="image/*"
+          style="display: none"
+        />
+
+        <!-- Hidden Input to Store Image URL -->
+        <input type="hidden" name="coverImage" id="cover-image-url" />
 
         <!-- Post Title Input -->
         <input
@@ -78,6 +91,7 @@
         width: "100%",
         /* Optional: Let users manually resize the editor from the bottom-right corner */
         resize: true,
+        menubar: false,
 
         // Autosave settings
         autosave_ask_before_unload: true, // Ask user before leaving if there's unsaved content
@@ -110,6 +124,37 @@
       function setPostStatus(status) {
         document.getElementById("post-status").value = status;
       }
+
+      document
+        .getElementById("add-cover-btn")
+        .addEventListener("click", function () {
+          document.getElementById("cover-image-input").click(); // Open file picker
+        });
+
+      document
+        .getElementById("cover-image-input")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+
+          if (file) {
+            const formData = new FormData();
+            formData.append("image", file, file.name);
+
+            fetch("http://localhost:4000/create/upload", {
+              method: "POST",
+              body: formData,
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.url) {
+                  document.getElementById("cover-image-url").value = data.url; // Store URL in hidden input
+                } else {
+                  alert("Image upload failed");
+                }
+              })
+              .catch(() => alert("Image upload failed"));
+          }
+        });
     </script>
   </body>
 </html>

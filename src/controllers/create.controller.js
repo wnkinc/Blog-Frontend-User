@@ -14,7 +14,7 @@ async function loadCreate(req, res, next) {
 // Function to handle post creation (Publish or Save Draft)
 async function createPost(req, res, next) {
   try {
-    const { title, content, status } = req.body;
+    const { title, content, status, coverImage } = req.body;
     const sub = req.user.sub;
     const accessToken = req.cookies.access_token; // Get token from cookies
 
@@ -41,6 +41,7 @@ async function createPost(req, res, next) {
         content,
         status,
         sub,
+        coverImage,
       },
       {
         headers: {
