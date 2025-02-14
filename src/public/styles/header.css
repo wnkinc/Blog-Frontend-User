@@ -1,15 +1,37 @@
 /************* Header & Navbar *************/
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
   background-color: #fff; /* White background */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Slight lift effect */
-  padding: 10px 20px; /* Adjusted padding for spacing */
+  padding: 5px 20px;
   transition: box-shadow 0.3s ease; /* Smooth shadow transition */
+  z-index: 10; /* Higher than default */
+  display: flex;
+  justify-content: center;
 }
 
 .navbar {
+  flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.logo {
+  margin-right: 15px;
+  display: inline-block;
+  align-self: center; /* Moves the logo to the bottom */
+  display: flex;
+}
+
+.logo img {
+  max-height: 34px;
+  height: auto;
+  width: auto;
 }
 
 /* Navigation Links */
@@ -26,31 +48,30 @@
 .btn-create-account {
   display: inline-block;
   background-color: transparent; /* No solid background */
-  color: #007bff; /* Blue text color */
+  color: #000; /* Blue text color */
   padding: 9.5px 16px; /* Padding for the button */
   font-size: 14px; /* Font size */
   text-decoration: none; /* Remove underline */
-  border: 1px solid #007bff; /* Blue outline */
+  border: 1px solid #000; /* Blue outline */
   border-radius: 7px; /* Rounded corners */
   transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   white-space: nowrap; /* Prevents text from wrapping */
+  margin-left: 20px;
 }
 
 /* Hover Effect */
 .btn-create-account:hover {
-  background-color: #007bff; /* Use text color as background */
+  background-color: #000; /* Use text color as background */
   color: #ffffff; /* White text */
-  border-color: #007bff; /* Keep border same as background */
-  text-decoration: underline; /* Underline text */
+  border-color: #000; /* Keep border same as background */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 /************* Search Bar *************/
 .search-bar {
   position: relative;
   flex-grow: 1;
-  max-width: 400px;
   display: flex;
-  align-items: center;
+  margin-right: auto; /* This pushes following items to the right */
 }
 
 .search-bar input {
@@ -65,17 +86,19 @@
 }
 
 .search-bar input:focus {
-  outline: none;
-  border-color: #007bff;
-  border-width: 1px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  color: #000;
+  outline: none; /* Remove default outline*/
+  border-color: #000; /* Blue border on focus */
+  border-width: 1px; /* Slightly thicker border */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Consistent with the button shadow */
+  box-sizing: border-box;
 }
 
 .search-bar .clear-btn {
   position: absolute;
   right: 10px;
   display: none;
-  font-size: 20px;
+  font-size: 30px;
   color: #666;
   cursor: pointer;
   background: none;
@@ -87,7 +110,7 @@
 }
 
 .search-bar .clear-btn:hover {
-  color: #007bff;
+  color: #000; /* Optional: Change color on hover */
 }
 
 /************* Notification Icon *************/
@@ -161,4 +184,31 @@
   display: flex;
   align-items: center; /* Ensures the image stays proportional */
   justify-content: center;
+}
+
+.logo-search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 1240px) {
+  .navbar {
+    max-width: 1240px;
+    justify-content: center; /* All items together in the center */
+    gap: 20px; /* Space between .logo, .search-bar, .nav-links */
+  }
+
+  /* Distribute space more evenly */
+  .search-bar {
+    margin-right: auto; /* Each direct child has horizontal spacing */
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .btn-create-account {
+    margin-left: 0;
+  }
 }
