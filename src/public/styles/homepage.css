@@ -205,7 +205,7 @@
   height: 220px;
   width: 100%;
   min-width: 118px;
-  background-color: #ecd06f;
+  background-color: #dcdad6;
   border-radius: 7px;
   margin-bottom: 10px;
   border: 1px solid #ccc; /* Light gray border */
@@ -221,6 +221,10 @@
   align-items: center;
   text-align: center;
   gap: 15px;
+
+  font-weight: bold; /* Makes text bold */
+  text-shadow: 0.2px 0.2px 0.8px rgba(0, 0, 0, 0.1); /* Adds a fuzzy effect */
+  filter: blur(0.2px); /* Slight blur to enhance fuzziness */
 }
 
 .random-panda p {
@@ -466,7 +470,6 @@ ul.links {
 
   .video-container {
     width: 100%; /* Shrinks the container */
-    max-width: 600px; /* Prevents it from getting too large */
     margin: 0 auto; /* Centers it */
     margin-bottom: 10px;
     text-align: center; /* Centers text */
