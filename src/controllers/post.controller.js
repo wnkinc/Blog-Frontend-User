@@ -89,16 +89,34 @@ const postComment = async (req, res, next) => {
  */
 const postReply = async (req, res, next) => {
   const { slug } = req.params; // Get post slug from URL
-  const { reply, commentId } = req.body; // Get reply content and comment ID from form
+  const { reply, commentId } = req.body; // Get reply content and parent comment ID
 
   try {
-    const apiUrl = `${process.env.BLOG_API_BASE_URL}/comments/${slug}/reply`;
+    const apiUrl = `${process.env.BLOG_API_BASE_URL}/comments/${slug}/reply/user`;
 
-    // Send data to backend API
-    await axios.post(apiUrl, {
-      content: reply, // Reply text
-      commentId, // ID of the comment being replied to
-    });
+    // Get tokens from cookies
+    const accessToken = req.cookies.access_token;
+    const idToken = req.cookies.id_token;
+
+    // Ensure both tokens are present
+    if (!accessToken || !idToken) {
+      return res.status(401).json({ error: "Unauthorized: Missing tokens." });
+    }
+
+    // Send reply data to backend API
+    await axios.post(
+      apiUrl,
+      {
+        content: reply, // Reply text
+        commentId, // Parent comment ID
+        idToken, // ID Token for retrieving user info
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Send Access Token in headers
+        },
+      }
+    );
 
     // Redirect back to the post page @ replies section
     res.redirect(`/post/${slug}#comments`);

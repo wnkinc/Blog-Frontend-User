@@ -224,7 +224,6 @@
 
   font-weight: bold; /* Makes text bold */
   text-shadow: 0.2px 0.2px 0.8px rgba(0, 0, 0, 0.1); /* Adds a fuzzy effect */
-  filter: blur(0.2px); /* Slight blur to enhance fuzziness */
 }
 
 .random-panda p {
@@ -406,13 +405,12 @@ ul.links {
 /* Social link default size */
 .social {
   font-size: 1.4rem; /* Base size */
-  transition: transform 0.2s ease-in-out; /* Smooth scaling effect */
+  transition: transform 0.25s ease-in-out; /* Smooth scaling effect */
 }
 
 /* Scale up the icon on hover */
 .social:hover {
   transform: scale(1.5);
-  color: #2779a7;
 }
 
 .filter-tabs {
