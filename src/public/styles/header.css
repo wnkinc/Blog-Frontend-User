@@ -142,7 +142,7 @@
 
 /* Change icon color on hover */
 .notification-container:hover .notification-icon svg {
-  stroke: #2779a7; /* Blue color on hover */
+  stroke: #000; /* Blue color on hover */
   transform: scale(1.05);
 }
 
