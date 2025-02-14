@@ -24,10 +24,7 @@ body {
   justify-content: space-between;
   align-items: center;
   font-weight: bold;
-}
-
-.header {
-  background-color: #b5b2b2;
+  background-color: #dcdad6;
 }
 
 .logo img {
@@ -39,11 +36,11 @@ body {
 /* General Button Styling */
 button {
   background-color: transparent; /* No solid background */
-  color: #007bff; /* Blue text color */
+  color: #2779a7; /* Blue text color */
   border: none;
   padding: 9.5px 16px;
   font-size: 14px;
-  border: 1px solid #007bff;
+  border: 1px solid #2779a7;
   cursor: pointer;
   border-radius: 7px;
   transition: all 0.2s ease-in-out;
@@ -51,10 +48,9 @@ button {
 }
 
 button:hover {
-  background-color: #007bff; /* Use text color as background */
+  background-color: #2779a7; /* Use text color as background */
   color: #ffffff; /* White text */
-  border-color: #007bff; /* Keep border same as background */
-  text-decoration: underline; /* Underline text */
+  border-color: #2779a7; /* Keep border same as background */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
@@ -63,13 +59,12 @@ button:hover {
 }
 
 .post-title {
-  background-color: aquamarine;
   font-size: 3rem; /* Large text */
   font-weight: bold; /* Bold text */
   padding: 10px; /* Add some spacing */
   border: none; /* Remove border */
   outline: none; /* Prevent focus outline */
-  color: #888;
+  color: #000;
 }
 
 .post-title::placeholder {
@@ -80,10 +75,29 @@ button:hover {
 
 /* Ensure the main content area stretches to fit */
 .create-post-container {
-  background-color: aquamarine;
   display: flex;
   flex-direction: column;
   height: calc(100vh - 60px);
+}
+
+.cover-image-container {
+  /* Make sure it has some height so the button has room */
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Center the button absolutely */
+.add-cover-btn {
+  margin-left: 25px;
+  margin-top: 5px;
+}
+
+/* Position the span to the right of the button's center */
+#cover-image-name {
+  font-size: larger;
+  display: flex;
+  align-self: center;
+  margin-right: 25px;
 }
 
 /* The form should fill available space */

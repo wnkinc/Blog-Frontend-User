@@ -28,10 +28,18 @@
     <!-- Create Post Container -->
     <main class="create-post-container">
       <form id="create-post-form" action="/create" method="POST">
-        <!-- Cover Image Button -->
-        <button type="button" class="add-cover-btn" id="add-cover-btn">
-          + Add Cover Image
-        </button>
+        <!-- Cover Image Section -->
+        <div class="cover-image-container">
+          <button type="button" class="add-cover-btn" id="add-cover-btn">
+            + Add Cover Image
+          </button>
+
+          <!-- File Name Display (Initially Empty) -->
+          <span
+            id="cover-image-name"
+            style="margin-left: 10px; font-weight: bold"
+          ></span>
+        </div>
 
         <!-- Hidden File Input -->
         <input
@@ -150,12 +158,22 @@
               .then((data) => {
                 if (data.url) {
                   document.getElementById("cover-image-url").value = data.url; // Store URL in hidden input
+                  // Display the file name
+                  document.getElementById("cover-image-name").textContent =
+                    file.name;
                 } else {
                   alert("Image upload failed");
                 }
               })
               .catch(() => alert("Image upload failed"));
           }
+        });
+    </script>
+    <script>
+      document
+        .getElementById("close-btn")
+        .addEventListener("click", function () {
+          window.location.href = "/dashboard"; // Redirects to dashboard
         });
     </script>
   </body>
