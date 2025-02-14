@@ -51,12 +51,30 @@ const postComment = async (req, res, next) => {
   const { comment } = req.body; // Get comment content from form
 
   try {
-    const apiUrl = `${process.env.BLOG_API_BASE_URL}/comments/${slug}`;
+    const apiUrl = `${process.env.BLOG_API_BASE_URL}/comments/${slug}/user`;
+
+    // Get tokens from cookies
+    const accessToken = req.cookies.access_token;
+    const idToken = req.cookies.id_token;
+
+    // Ensure both tokens are present
+    if (!accessToken || !idToken) {
+      return res.status(401).json({ error: "Unauthorized: Missing tokens." });
+    }
 
     // Send data to backend API
-    await axios.post(apiUrl, {
-      content: comment, // Comment text
-    });
+    await axios.post(
+      apiUrl,
+      {
+        content: comment, // Comment text
+        idToken: idToken, // Send ID Token to extract username
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Send Access Token in headers
+        },
+      }
+    );
 
     // Redirect back to the post page @ comments
     res.redirect(`/post/${slug}#comments`);
