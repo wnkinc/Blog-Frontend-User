@@ -30,6 +30,12 @@ body {
   background-color: #b5b2b2;
 }
 
+.logo img {
+  max-height: 34px;
+  height: auto;
+  width: auto;
+}
+
 /* General Button Styling */
 button {
   background-color: transparent; /* No solid background */

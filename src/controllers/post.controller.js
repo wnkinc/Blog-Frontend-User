@@ -28,6 +28,8 @@ const getPostBySlug = async (req, res, next) => {
       );
     });
 
+    console.log("Post fetched by slug:", post.content);
+
     // Render the post view with the post data & reactions
     res.render("newpost", {
       pageTitle: post.title,
