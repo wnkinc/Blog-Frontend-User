@@ -1,0 +1,32 @@
+<section class="mainpost">
+  <div class="post-cover">
+    <% if (post.coverImage) { %>
+    <img src="<%= post.coverImage %>" alt="Cover image for <%= post.title %>" />
+    <% } %>
+  </div>
+  <div class="post-header">
+    <div class="post-author">
+      <img
+        src="<%= post.author.profilePicUrl || '/default-profile.png' %>"
+        alt="<%= post.author.username %>'s profile picture"
+        class="profile-pic"
+      />
+      <div class="author-info">
+        <span class="author-name">
+          <button
+            data-author="<%= post.author.username %>"
+            class="author-filter"
+          >
+            <%= post.author.username %>
+          </button>
+        </span>
+        <span class="post-date">
+          <%= new Date(post.createdAt).toLocaleDateString() %>
+        </span>
+      </div>
+    </div>
+    <h1 class="post-title"><%= post.title %></h1>
+  </div>
+  <hr />
+  <div class="post-content"><%- post.content %></div>
+</section>

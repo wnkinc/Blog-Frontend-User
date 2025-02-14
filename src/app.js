@@ -22,10 +22,12 @@ app.use(cookieParser());
 const dashboardRouter = require("./routes/dashboard.routes");
 const profileRouter = require("./routes/profile.routes");
 const createRouter = require("./routes/create.routes");
+const postRoutes = require("./routes/post.routes");
 
 app.use("/create", createRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/profile", profileRouter);
+app.use("/post", postRoutes);
 
 /**
  * -------------- Error handling ----------------

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= pageTitle || "My Dev.to Clone" %></title>
+    <link rel="stylesheet" href="/styles/mainpost.css" />
+    <link rel="stylesheet" href="/styles/header.css" />
+    <link rel="stylesheet" href="/styles/footer.css" />
+  </head>
+  <body data-post-id="<%= post.id %>">
+    <!-- Header -->
+    <%- include('partials/header') %>
+
+    <div class="container">
+      <!-- Left Sidebar -->
+      <%- include('partials/left-post-sidebar') %>
+
+      <!-- Main Content -->
+      <main class="content">
+        <%- include('partials/mainpost') %><%- include('partials/comments') %>
+      </main>
+
+      <aside class="sidebar right">
+        <%- include('partials/right-post-sidebar') %>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <%- include('partials/footer') %>
+
+    <!-- Load Matter.js from a CDN -->
+    <script src="https://unpkg.com/matter-js@0.19.0/build/matter.min.js"></script>
+    <script defer src="/scripts/mainpost.js"></script>
+    <script defer src="/scripts/reactions.js"></script>
+    <script defer src="/scripts/left-post-sidebar.js"></script>
+  </body>
+</html>

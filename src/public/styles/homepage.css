@@ -1,13 +1,28 @@
+/* Make the left sidebar sticky */
 .container {
-  flex: 1; /* Allow the container to grow and fill available space */
-  display: flex;
   margin: 20px;
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 
-.sidebar {
+.sidebar.left {
   flex: 1;
-  background: #f4f4f4;
-  padding: 10px;
+  background: transparent;
+  padding: 20px;
+  padding-right: 10px;
+  padding-top: 0;
+  position: sticky;
+  top: 60px; /* Adjust to match the header height */
+  align-self: stretch; /* Ensures it stays aligned in flex container */
+  max-height: calc(100vh - 140px); /* Allow full viewport height minus header */
+  overflow-y: auto; /* Enables scrolling inside sidebar if needed */
+  max-width: 220px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.sidebar.right {
+  display: none;
 }
 
 .content {
@@ -15,21 +30,524 @@
   padding: 10px;
 }
 
-.card {
-  background: #fff;
-  margin-bottom: 20px;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.card h2 a {
-  text-decoration: none;
+.feed-post {
+  flex: 1;
+  max-width: 650px; /* Set width constraint */
+  font-family: Arial, sans-serif;
   color: #333;
+  word-wrap: break-word;
+  border: 2px solid #e0e0e0;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: #fff;
+  overflow: visible;
+  margin-bottom: 8px;
 }
 
-.card a {
-  margin-right: 5px;
-  color: #007bff;
+.feed-post .post-header {
+  padding: 15px 15px;
+  padding-bottom: 0;
+}
+
+/* Adjusting cover image for smaller feed post */
+.feed-post .post-cover img {
+  width: 100%;
+  max-width: 650px;
+  height: auto;
+  aspect-ratio: 650 / 273; /* Enforce smaller aspect ratio */
+  object-fit: cover;
+  display: block;
+  border-radius: 6px 6px 0 0;
+}
+
+/* Title inside the feed */
+.feed-post .post-title {
+  font-size: 2rem;
+  margin: 0.3rem;
+  margin-left: 41px;
+}
+
+.author-name a,
+.post-title a {
   text-decoration: none;
+  color: #000;
+}
+
+.author-name button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+/* Post meta info */
+.feed-post .post-meta {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Profile section: align image + text */
+.post-author {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between profile picture and text */
+  margin-bottom: 6px;
+}
+
+/* Circular profile picture */
+.profile-pic {
+  width: 30px; /* Adjust as needed */
+  height: 30px;
+  border-radius: 50%; /* Makes it circular */
+  object-fit: cover; /* Ensures image fills without distortion */
+  display: block;
+}
+
+/* Author name styling */
+.author-info {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+}
+
+.author-name {
+  font-weight: bold;
+}
+
+.post-date {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* Style for reaction and comment links */
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px; /* Space between reaction and comment links */
+  padding: 10px 32px; /* Align with post-header */
+  margin-left: 28px;
+}
+
+/* Base styles for both reaction & comment links */
+.reaction-link,
+.comment-link {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Space between emoji & text */
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: #333;
+  background: #fff;
+  padding: 3px 6px;
+  border-radius: 7px;
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Hover effects */
+.reaction-link:hover,
+.comment-link:hover {
+  background: #2779a7;
+  color: #fff;
+  text-decoration: none;
+  transform: scale(1.1);
+}
+
+.reactions-comments {
+  display: flex;
+}
+
+.mins-read {
+  margin: 0;
+  margin-right: 15px;
+  font-size: 0.85rem;
+  color: #666;
+  align-self: flex-end;
+}
+
+.read-time {
+  display: flex;
+  align-items: flex-end;
+}
+
+/* Adjust emoji size */
+/* .reaction-link span,
+.comment-link span {
+  font-size: 1.1rem;
+} */
+
+.post-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: 0;
+}
+
+.sidebar-icon {
+  width: 18px;
+  height: 18px;
+  fill: none !important;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: color 0.2s ease-in-out;
+}
+
+.links-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.random-panda {
+  margin-bottom: 20px;
+  height: 220px;
+  width: 100%;
+  min-width: 118px;
+  background-color: #ecd06f;
+  border-radius: 7px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc; /* Light gray border */
+  padding: 10px; /* Adds spacing inside */
+
+  /* Prevents padding from increasing size */
+  box-sizing: border-box;
+
+  /* Center everything */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 15px;
+}
+
+.random-panda p {
+  margin: 0;
+}
+
+.panda-button {
+  background-color: #d9534f; /* Blue button */
+  color: white;
+  padding: 10px !important;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0 !important;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  overflow: hidden;
+  white-space: normal !important;
+}
+
+.panda-button:hover {
+  background-color: #ae423e; /* Darker blue on hover */
+}
+
+.random-panda a {
+  font-size: 1rem !important;
+}
+
+.panda-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.random-panda {
+  position: relative; /* Ensures child elements like the badge are positioned relative to it */
+}
+
+/* Notification Badge */
+/* .notification-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  animation: shake-rotate 0.4s ease-in-out infinite;
+  animation-iteration-count: 1;
+  animation-delay: 5s;
+}
+
+@keyframes shake-rotate {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  20% {
+    transform: translateX(-2px) rotate(-12deg);
+  }
+  40% {
+    transform: translateX(2px) rotate(12deg);
+  }
+  60% {
+    transform: translateX(-2px) rotate(-12deg);
+  }
+  80% {
+    transform: translateX(2px) rotate(12deg);
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+} */
+
+.sprite-animation {
+  display: inline-block;
+  width: 120px; /* Intermediate size */
+  height: 67.5px; /* Calculated to maintain ratio (120 * (45 / 80)) */
+  background: url("/imgs/output.png") no-repeat 0 0;
+  background-size: 11520px 67.5px; /* Adjust background size proportionally */
+}
+
+#sprite {
+  margin: 0;
+}
+
+/* Remove bullet points from list items */
+ul.links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Add spacing between list items */
+.links.top li a {
+  margin-bottom: 15px; /* Adjust as needed */
+}
+
+/* Style the social media links */
+.links-section a {
+  font-size: 1.4rem; /* Increase size of social icons */
+  margin-right: 20px; /* Add spacing between icons */
+  display: inline-block;
+  color: #000;
+  white-space: nowrap;
+}
+
+.links-section hr {
+  margin: 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+.social-links {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.links.bottom {
+  margin-top: 15px;
+}
+
+.links.bottom a {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+/* Ensure list items are displayed properly */
+.links li {
+  position: relative;
+  display: inline-block; /* Keeps layout intact */
+  padding-bottom: 5px; /* Space for the yellow bar */
+}
+
+/* Create initial thin yellow underline */
+.links li a {
+  position: relative;
+  text-decoration: none;
+  padding: 5px 0;
+  z-index: 2;
+}
+
+.links li a::after {
+  content: "";
+  position: absolute;
+  left: -6px;
+  bottom: -6px;
+  width: 100%;
+  height: 5px; /* Thin yellow bar initially */
+  background-color: #ecd06f;
+  transition: height 0.3s ease-in-out;
+  z-index: -1;
+}
+
+/* Hover effect: expand yellow bar to enclose the text */
+.links li a:hover::after {
+  height: 85%;
+}
+
+/* Ensure the text remains visible on hover */
+.links li a:hover {
+  color: #000; /* Keep text color unchanged */
+  position: relative;
+  z-index: 1;
+}
+
+.social-links {
+  position: relative;
+  display: flex;
+  gap: 10px;
+}
+
+/* Social link default size */
+.social {
+  font-size: 1.4rem; /* Base size */
+  transition: transform 0.3s ease-in-out; /* Smooth scaling effect */
+}
+
+/* Scale up the icon on hover */
+.social:hover {
+  transform: scale(1.5);
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 10px;
+  margin-left: 6px;
+}
+
+.filter-tab {
+  border: none;
+  outline: none;
+  background: #f9fafb;
+  color: #666;
+  font-size: larger;
+  padding: 5px;
+}
+
+.filter-tabs .active {
+  background-color: #e0e0e0;
+  color: #000;
+  border-radius: 8px 8px 0 0;
+}
+
+@media (min-width: 1240px) {
+  .container {
+    max-width: 1350px;
+    align-self: center;
+  }
+
+  .sidebar.left {
+    min-width: 220px;
+  }
+
+  .sidebar.right {
+    display: block;
+    min-width: 350px;
+    margin-top: 10px;
+
+    display: flex; /* Allows child elements (like #balloon-column) to stretch */
+    flex-direction: column;
+    position: relative;
+  }
+
+  .sidebar.right .balloon-box {
+    position: absolute; /* Removes from document flow, so it doesn’t take space */
+    top: 360px; /* Adjust as needed to position it correctly */
+    left: 50%; /* Center it horizontally */
+    transform: translateX(-50%); /* Ensure it's truly centered */
+    width: 360px; /* Keep its original width */
+    pointer-events: none;
+  }
+
+  #balloon-column {
+    flex-grow: 1;
+  }
+
+  .ad {
+    width: 350px;
+    height: 350px;
+    background-color: #ecd06f;
+    border-radius: 7px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc; /* Light gray border */
+    /* Adds spacing inside */
+
+    /* Prevents padding from increasing size */
+    box-sizing: border-box;
+
+    /* Center everything */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .ad-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 0 !important;
+  }
+
+  .ad-image {
+    max-width: 80px; /* Adjust the image size */
+    height: auto;
+    border-radius: 50%; /* Makes the image circular if desired */
+    float: left; /* Aligns image to the left */
+    margin-right: 10px; /* Adds space between the image and text */
+  }
+
+  /* Apply previous styles to new class names */
+  .ad-line {
+    display: block;
+    text-align: left; /* Ensure left alignment */
+  }
+
+  .ad-line-1 {
+    font-weight: bold; /* From .ad-highlight */
+    color: #000;
+    margin-left: 0px;
+    text-align: center;
+  }
+
+  .ad-line-2 {
+    color: #d9534f; /* From .ad-secondary */
+    margin-left: 15px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .ad-line-3 {
+    color: #000; /* From .ad-emphasis */
+
+    margin-left: 30px;
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* Button Styling */
+  .ad-button {
+    display: inline-block;
+    background-color: #d9534f; /* Blue button */
+    color: white;
+    padding: 10px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    margin: 0 20px;
+  }
+
+  .ad-button:hover {
+    background-color: #ae423e; /* Darker blue on hover */
+  }
+
+  .random-panda {
+    display: none;
+  }
 }
