@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Profile</title>
-    <link rel="stylesheet" href="/styles/profilepage.css" />
     <link rel="stylesheet" href="/styles/header.css" />
     <link rel="stylesheet" href="/styles/footer.css" />
+    <link rel="stylesheet" href="/styles/profilepage.css" />
   </head>
   <body>
     <%- include('partials/header') %>
@@ -53,6 +53,9 @@
                     <%= new Date(post.createdAt).toLocaleDateString() %>
                   </span>
                 </div>
+                <span class="<%= post.published ? 'published' : 'draft' %>">
+                  <%= post.published ? 'Published' : 'Draft' %>
+                </span>
               </div>
 
               <h2 class="post-title">
@@ -138,6 +141,10 @@
     </div>
 
     <%- include('partials/footer') %>
-    <script src="/js/main.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector(".logo").style.display = "block";
+      });
+    </script>
   </body>
 </html>

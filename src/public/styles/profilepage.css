@@ -18,26 +18,30 @@ body {
   ==================================================== */
 .page-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* Prevents wrapping */
+  justify-content: space-between; /* Ensures spacing between columns */
   max-width: 1240px;
   margin: 20px auto;
+  margin-top: 0;
   background: #fff;
   border-radius: 8px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  padding-top: 45px;
 }
 
 /* Left Column: Posts Feed */
 .left-column {
-  flex: 1;
+  flex-grow: 1; /* Takes up all remaining space */
+  min-width: 0; /* Prevents overflow issues */
   padding: 20px;
+  min-width: 450px;
 }
 
 /* Right Column: Profile Sidebar */
 .right-column {
-  flex-shrink: 0;
-  width: 350px;
   padding: 20px;
+  padding-left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,11 +53,9 @@ body {
 .feed {
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
 
 .feed-post {
-  max-width: 650px;
   font-family: Arial, sans-serif;
   color: #333;
   word-wrap: break-word;
@@ -61,7 +63,7 @@ body {
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   background: #fff;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   overflow: visible;
 }
 
@@ -75,7 +77,9 @@ body {
 .feed-post .post-cover img {
   width: 100%;
   height: auto;
+  aspect-ratio: 650 / 273; /* Enforce smaller aspect ratio */
   object-fit: cover;
+  display: block;
   border-radius: 6px 6px 0 0;
 }
 
@@ -92,6 +96,20 @@ body {
   color: #000;
 }
 
+.published,
+.draft {
+  padding: 5px 10px;
+  margin-left: auto;
+}
+
+.published {
+  background-color: #2779a7;
+  color: #fff;
+}
+
+.draft {
+  background-color: #ecd06f;
+}
 /* ----------------------------------------------------
      Post Author & Meta
   ---------------------------------------------------- */
@@ -124,6 +142,13 @@ body {
   color: #666;
 }
 
+.author-name button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding: 0;
+  font-size: 0.9rem;
+}
 /* ----------------------------------------------------
      Post Actions (Reactions, Comments, Read Time)
   ---------------------------------------------------- */
@@ -224,18 +249,13 @@ body {
   padding: 0 10px;
 }
 
+.notification-container {
+  width: 38px !important;
+  height: 38px !important;
+}
+
 /* ====================================================
      Responsive Adjustments
   ==================================================== */
 @media (max-width: 1240px) {
-  .page-container {
-    flex-direction: column;
-  }
-  .right-column {
-    width: 100%;
-    padding: 20px;
-  }
-  .feed-post {
-    max-width: 100%;
-  }
 }
