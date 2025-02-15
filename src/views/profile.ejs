@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/styles/profilepage.css" />
+    <link rel="stylesheet" href="/styles/header.css" />
+    <link rel="stylesheet" href="/styles/footer.css" />
+  </head>
+  <body>
+    <%- include('partials/header') %>
+
+    <div class="page-container">
+      <!-- Left Column: Posts Feed -->
+      <div class="left-column">
+        <div class="feed">
+          <% posts.forEach(post => { %>
+          <section
+            class="mainpost feed-post"
+            data-author="<%= post.author.username %>"
+            data-date="<%= post.createdAt %>"
+            data-reactions="<%= post.reactionsCount || 0 %>"
+          >
+            <a href="/post/<%= post.slug %>" class="post-link">
+              <div class="post-cover">
+                <% if (post.coverImage) { %>
+                <img
+                  src="<%= post.coverImage %>"
+                  alt="Cover image for <%= post.title %>"
+                />
+                <% } %>
+              </div>
+            </a>
+
+            <div class="post-header">
+              <div class="post-author">
+                <img
+                  src="<%= post.author.profilePicUrl || '/default-profile.png' %>"
+                  alt="<%= post.author.username %>'s profile picture"
+                  class="profile-pic"
+                />
+                <div class="author-info">
+                  <span class="author-name">
+                    <button
+                      data-author="<%= post.author.username %>"
+                      class="author-filter"
+                    >
+                      <%= post.author.username %>
+                    </button>
+                  </span>
+                  <span class="post-date">
+                    <%= new Date(post.createdAt).toLocaleDateString() %>
+                  </span>
+                </div>
+              </div>
+
+              <h2 class="post-title">
+                <a href="/post/<%= post.slug %>"><%= post.title %></a>
+              </h2>
+            </div>
+
+            <div class="post-actions">
+              <div class="reactions-comments">
+                <a
+                  href="/post/<%= post.slug %>#reactions"
+                  class="reaction-link"
+                >
+                  <span class="emoji">
+                    <svg
+                      class="sidebar-icon"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                      />
+                    </svg>
+                  </span>
+                  <span class="count"><%= post.reactionsCount || 0 %></span>
+                </a>
+
+                <a href="/post/<%= post.slug %>#comments" class="comment-link">
+                  <span class="emoji">
+                    <svg
+                      class="sidebar-icon"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  <span class="count"><%= post.comments.length %></span>
+                </a>
+              </div>
+
+              <div class="read-time">
+                <% var wordsPerMinute = 200; var contentText = post.content ?
+                post.content.trim() : ""; var wordCount = contentText.length ===
+                0 ? 0 : contentText.split(/\s+/).length; var readTime =
+                Math.max(1, Math.round(wordCount / wordsPerMinute)); %>
+                <p class="mins-read"><%= readTime %> min read</p>
+                <svg
+                  class="sidebar-icon"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M19 21l-7-5-7 5V5c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2v16z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </section>
+          <% }); %>
+        </div>
+      </div>
+
+      <!-- Right Column: Profile Sidebar -->
+      <div class="right-column">
+        <div class="profile-box">
+          <img
+            src="<%= user.profilePicUrl || '/default-profile.png' %>"
+            alt="<%= user.username %>'s profile picture"
+            class="profile-pic-large"
+          />
+          <h2 class="username"><%= user.username %></h2>
+          <p class="bio"><%= user.bio %></p>
+        </div>
+      </div>
+    </div>
+
+    <%- include('partials/footer') %>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

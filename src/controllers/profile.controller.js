@@ -21,15 +21,14 @@ async function loadProfile(req, res, next) {
     const userData = response.data.user; // Get user data from the response
     console.log("User Data Response:", response.data);
 
-    // Render the profile view with the fetched user data
+    // Render the profile view with the fetched user data and posts
     res.render("profile", {
       title: "Profile",
-      user: userData, // Pass user data to the view
+      user: userData,
+      posts: userData.posts, // Now each post includes 'author' and 'comments'
     });
   } catch (error) {
     console.error("Error loading profile:", error.message);
-
-    // Pass the error to the global error handler
     next(error);
   }
 }
