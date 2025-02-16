@@ -34,7 +34,7 @@ body {
 .left-column {
   flex-grow: 1; /* Takes up all remaining space */
   min-width: 0; /* Prevents overflow issues */
-  padding: 20px;
+  padding: 20px 50px;
   min-width: 450px;
 }
 

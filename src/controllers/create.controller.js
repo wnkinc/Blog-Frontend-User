@@ -54,7 +54,7 @@ async function createPost(req, res, next) {
     if (status === "published") {
       res.redirect(`/post/${response.data.slug}`); // Redirect to published post
     } else {
-      res.redirect("/dashboard"); // Redirect to drafts list
+      res.redirect("/profile"); // Redirect to drafts list
     }
   } catch (error) {
     console.error("Error creating post:", error.message);
