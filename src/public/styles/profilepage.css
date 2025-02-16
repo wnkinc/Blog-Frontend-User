@@ -52,6 +52,40 @@ body {
   align-items: center;
 }
 
+.bio-update-box {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bio-update-box button {
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%; /* Ensures button matches textarea width */
+  background-color: white;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.bio-update-box button:hover {
+  background-color: #2779a7;
+  border: 1px solid #2779a7;
+  color: white;
+}
+
+#bio-textarea {
+  width: 100%; /* Fills the available width */
+  resize: vertical; /* Allows only vertical resizing */
+  min-height: 100px; /* Optional: Set a minimum height */
+  max-height: 300px; /* Optional: Set a max height */
+  padding: 10px; /* Optional: Better spacing */
+  font-size: 16px; /* Optional: Readable text */
+}
+
 /* ====================================================
      Feed & Feed Posts (adapted from homepage)
   ==================================================== */
