@@ -33,6 +33,41 @@ async function loadProfile(req, res, next) {
   }
 }
 
+async function updateBio(req, res, next) {
+  try {
+    // Extract user ID (sub) from the token attached by verifyToken middleware
+    const userSub = req.user.sub;
+    const accessToken = req.cookies.access_token;
+    const { bio } = req.body; // Get the new bio from the request body
+
+    if (!bio || typeof bio !== "string") {
+      return res.status(400).json({ error: "Bio must be a valid string." });
+    }
+
+    // Backend API endpoint to update user bio
+    const apiUrl = `${process.env.BLOG_API_BASE_URL}/users/${userSub}/bio`;
+
+    // Make the PUT request to update the bio
+    const response = await axios.post(
+      apiUrl,
+      { bio },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    console.log("Bio Updated Response:", response.data);
+
+    res.redirect("/profile");
+  } catch (error) {
+    console.error("Error updating bio:", error.message);
+    next(error);
+  }
+}
+
 module.exports = {
   loadProfile,
+  updateBio,
 };

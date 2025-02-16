@@ -139,6 +139,21 @@
           <h2 class="username"><%= user.username %></h2>
           <p class="bio"><%= user.bio %></p>
         </div>
+        <!-- Bio Update Form -->
+        <div class="bio-update-box">
+          <h3>Update Your Bio</h3>
+          <form action="/profile/bio" method="POST">
+            <textarea
+              name="bio"
+              id="bio-textarea"
+              placeholder="Write something about yourself..."
+              required
+            >
+            <%= user.bio || '' %></textarea
+            >
+            <button type="submit">Update Bio</button>
+          </form>
+        </div>
       </div>
     </div>
 
@@ -148,6 +163,37 @@
       document.addEventListener("DOMContentLoaded", function () {
         document.querySelector(".logo").style.display = "block";
       });
+    </script>
+    <script>
+      document
+        .getElementById("bio-form")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const bio = document.getElementById("bio-textarea").value.trim();
+          if (!bio) return;
+
+          const response = await fetch("/profile/bio", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ bio }),
+          });
+
+          const messageElement = document.getElementById("bio-message");
+
+          if (response.ok) {
+            messageElement.textContent = "Bio updated successfully!";
+            messageElement.style.color = "green";
+            location.reload(); // Refresh to show the updated bio
+          } else {
+            messageElement.textContent = "Failed to update bio.";
+            messageElement.style.color = "red";
+          }
+
+          messageElement.style.display = "block";
+        });
     </script>
   </body>
 </html>
