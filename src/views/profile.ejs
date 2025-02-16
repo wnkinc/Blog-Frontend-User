@@ -14,6 +14,7 @@
     <div class="page-container">
       <!-- Left Column: Posts Feed -->
       <div class="left-column">
+        <%- include('partials/publishedFilter') %>
         <div class="feed">
           <% posts.forEach(post => { %>
           <section
@@ -21,6 +22,7 @@
             data-author="<%= post.author.username %>"
             data-date="<%= post.createdAt %>"
             data-reactions="<%= post.reactionsCount || 0 %>"
+            data-published="<%= post.published %>"
           >
             <a href="/post/<%= post.slug %>" class="post-link">
               <div class="post-cover">
@@ -141,6 +143,7 @@
     </div>
 
     <%- include('partials/footer') %>
+    <script defer src="/scripts/published-filter.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         document.querySelector(".logo").style.display = "block";
