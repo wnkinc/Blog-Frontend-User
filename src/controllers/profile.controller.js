@@ -67,7 +67,42 @@ async function updateBio(req, res, next) {
   }
 }
 
+async function updateProfilePic(req, res, next) {
+  try {
+    // Extract user ID (sub) from the token attached by verifyToken middleware
+    const userSub = req.user.sub;
+    const accessToken = req.cookies.access_token;
+    const { profilePicUrl } = req.body; // Get the profile picture URL from the request body
+
+    if (!profilePicUrl || typeof profilePicUrl !== "string") {
+      return res.status(400).json({ error: "Invalid profile picture URL." });
+    }
+
+    // Backend API endpoint to update the profile picture
+    const apiUrl = `${process.env.BLOG_API_BASE_URL}/users/${userSub}/pic`;
+
+    // Make the POST request to update the profile picture
+    const response = await axios.post(
+      apiUrl,
+      { profilePicUrl },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    console.log("Profile Picture Updated Response:", response.data);
+
+    res.redirect("/profile");
+  } catch (error) {
+    console.error("Error updating profile picture:", error.message);
+    next(error);
+  }
+}
+
 module.exports = {
   loadProfile,
   updateBio,
+  updateProfilePic,
 };

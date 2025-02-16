@@ -38,7 +38,7 @@
             <div class="post-header">
               <div class="post-author">
                 <img
-                  src="<%= post.author.profilePicUrl || '/default-profile.png' %>"
+                  src="<%= post.author.profilePic || '/default-profile.png' %>"
                   alt="<%= post.author.username %>'s profile picture"
                   class="profile-pic"
                 />
@@ -132,7 +132,7 @@
       <div class="right-column">
         <div class="profile-box">
           <img
-            src="<%= user.profilePicUrl || '/default-profile.png' %>"
+            src="<%= user.profilePic || '/default-profile.png' %>"
             alt="<%= user.username %>'s profile picture"
             class="profile-pic-large"
           />
@@ -154,6 +154,41 @@
             <button type="submit">Update Bio</button>
           </form>
         </div>
+        <div class="profile-pic-update">
+          <h3>Update Profile Picture</h3>
+          <form action="/profile/pic" method="POST">
+            <!-- Hidden file input -->
+            <input
+              type="file"
+              name="profilePic"
+              id="profile-pic-input"
+              accept="image/*"
+              hidden
+            />
+
+            <!-- Upload Button -->
+            <button
+              type="button"
+              onclick="document.getElementById('profile-pic-input').click()"
+            >
+              Choose File
+            </button>
+
+            <!-- Display selected file name -->
+            <span id="profile-pic-name">No file chosen</span>
+
+            <!-- Hidden input to store the uploaded image URL -->
+            <input
+              type="hidden"
+              name="profilePicUrl"
+              id="profile-pic-url"
+              required
+            />
+
+            <!-- Submit Button -->
+            <button type="submit" disabled id="upload-submit">Upload</button>
+          </form>
+        </div>
       </div>
     </div>
 
@@ -163,6 +198,35 @@
       document.addEventListener("DOMContentLoaded", function () {
         document.querySelector(".logo").style.display = "block";
       });
+    </script>
+    <script>
+      document
+        .getElementById("profile-pic-input")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+
+          if (file) {
+            const formData = new FormData();
+            formData.append("image", file, file.name);
+
+            fetch("http://localhost:4000/create/upload", {
+              method: "POST",
+              body: formData,
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.url) {
+                  document.getElementById("profile-pic-url").value = data.url; // Store URL
+                  document.getElementById("profile-pic-name").textContent =
+                    file.name; // Show file name
+                  document.getElementById("upload-submit").disabled = false; // Enable submit button
+                } else {
+                  alert("Image upload failed");
+                }
+              })
+              .catch(() => alert("Image upload failed"));
+          }
+        });
     </script>
   </body>
 </html>
