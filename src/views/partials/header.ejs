@@ -69,7 +69,7 @@
       <li class="nav-item">
         <a href="/profile">
           <img
-            src="/images/profile-placeholder.png"
+            src="<%= user && user.profilePic ? user.profilePic : '/images/profile-placeholder.png' %>"
             alt="Profile"
             class="profile-icon"
           />
