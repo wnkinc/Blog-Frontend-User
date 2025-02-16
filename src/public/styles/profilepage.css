@@ -52,12 +52,25 @@ body {
   align-items: center;
 }
 
-.bio-update-box {
+.bio-update-box,
+.profile-pic-update {
   width: 100%;
   padding: 20px 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.profile-pic-update {
+  padding-top: 0;
+}
+
+.profile-pic-update button {
+  padding: 5px 10px;
+  background-color: transparent;
+  border: 1px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .bio-update-box button {
@@ -71,7 +84,8 @@ body {
   cursor: pointer;
 }
 
-.bio-update-box button:hover {
+.bio-update-box button:hover,
+.profile-pic-update button:hover {
   background-color: #2779a7;
   border: 1px solid #2779a7;
   color: white;
