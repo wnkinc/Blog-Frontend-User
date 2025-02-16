@@ -176,5 +176,17 @@
           window.location.href = "/dashboard"; // Redirects to dashboard
         });
     </script>
+    <script>
+      // When the preview button is clicked, set status to "draft" and submit the form.
+      document
+        .getElementById("preview-tab")
+        .addEventListener("click", function (e) {
+          e.preventDefault(); // Prevent any default behavior
+          // Set the post status to draft (same as Save Draft)
+          setPostStatus("preview");
+          // Submit the form
+          document.getElementById("create-post-form").submit();
+        });
+    </script>
   </body>
 </html>
