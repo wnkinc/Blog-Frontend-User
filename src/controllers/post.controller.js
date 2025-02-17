@@ -143,9 +143,42 @@ const postReactions = async (req, res, next) => {
   }
 };
 
+/**
+ * -------------- DELETE post ----------------
+ */
+async function deletePost(req, res, next) {
+  const { id } = req.params; // Get post ID from request params
+
+  try {
+    const apiUrl = `${process.env.BLOG_API_BASE_URL}/posts/${id}/delete`;
+
+    // Get tokens from cookies
+    const accessToken = req.cookies.access_token;
+
+    // Ensure access token is present
+    if (!accessToken) {
+      return res.status(401).json({ error: "Unauthorized: Missing token." });
+    }
+
+    // Make DELETE request to backend API
+    const response = await axios.delete(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`, // Send access token
+      },
+    });
+
+    // Redirect back to profile after deletion
+    res.status(200).json(response.data);
+  } catch (error) {
+    console.error("Error deleting post:", error.response?.data || error);
+    next(error); // Forward to error handling middleware
+  }
+}
+
 module.exports = {
   getPostBySlug,
   postComment,
   postReply,
   postReactions,
+  deletePost,
 };
