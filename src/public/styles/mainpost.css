@@ -594,7 +594,7 @@ hr {
 
   .sidebar.right .balloon-box {
     position: absolute; /* Removes from document flow, so it doesn’t take space */
-    top: 250px; /* Adjust as needed to position it correctly */
+    top: 360px; /* Adjust as needed to position it correctly */
     left: 50%; /* Center it horizontally */
     transform: translateX(-50%); /* Ensure it's truly centered */
     width: 360px; /* Keep its original width */
@@ -605,21 +605,44 @@ hr {
     flex-grow: 1;
   }
 
-  .video-container {
-    width: 100%; /* Shrinks the container */
-    margin: 0 auto; /* Centers it */
+  .profile-box {
+    width: 350px;
+    height: 350px;
+    border: 2px solid #e0e0e0;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background: #fff;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
     margin-bottom: 10px;
-    text-align: center; /* Centers text */
+    box-sizing: border-box;
   }
 
-  .video-container video {
-    width: 100%; /* Makes the video responsive */
-    height: auto; /* Maintains aspect ratio */
+  /* Large Profile Picture */
+  .profile-pic-large {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
   }
 
-  video {
-    display: block; /* Ensures proper spacing */
-    box-shadow: 2px 1px 3px rgba(0, 0, 0, 0.6); /* Right & Bottom shadow */
+  /* Username & Bio */
+  .username {
+    font-size: 1.8rem;
+    color: #333;
+    margin: 10px 0;
+  }
+
+  .bio {
+    font-size: 1rem;
+    color: #666;
+    padding: 0 10px;
   }
 }
 

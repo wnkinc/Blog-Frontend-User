@@ -484,7 +484,25 @@ ul.links {
     box-shadow: 2px 1px 3px rgba(0, 0, 0, 0.6); /* Right & Bottom shadow */
   }
 
+  .smaller {
+    display: none;
+  }
+
   .random-panda {
     display: none;
   }
+}
+
+.smaller {
+  width: 100%; /* Shrinks the container */
+  margin: 0 auto; /* Centers it */
+  margin-bottom: 10px;
+  text-align: center; /* Centers text */
+}
+
+.smaller video {
+  width: 100%; /* Makes the video responsive */
+  height: auto; /* Maintains aspect ratio */
+  display: block; /* Ensures proper spacing */
+  box-shadow: 2px 1px 3px rgba(0, 0, 0, 0.6); /* Right & Bottom shadow */
 }

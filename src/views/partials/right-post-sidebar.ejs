@@ -1,8 +1,11 @@
-<div class="video-container">
-  <video autoplay loop muted playsinline>
-    <source src="/imgs/wd-handbrake1.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+<div class="profile-box">
+  <img
+    src="<%= post.author.profilePic || '/default-profile.png' %>"
+    alt="<%= post.author.username %>'s profile picture"
+    class="profile-pic-large"
+  />
+  <h2 class="username"><%= post.author.username %></h2>
+  <p class="bio"><%= post.author.bio %></p>
 </div>
 <img class="balloon-box" src="/imgs/box.png" alt="Logo box" />
 <div id="balloon-column"></div>
