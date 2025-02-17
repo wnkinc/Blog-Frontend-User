@@ -55,11 +55,17 @@
                     <%= new Date(post.createdAt).toLocaleDateString() %>
                   </span>
                 </div>
+
                 <span class="<%= post.published ? 'published' : 'draft' %>">
                   <%= post.published ? 'Published' : 'Draft' %>
                 </span>
+                <a
+                  href="/create/?postSlug=<%= post.slug %>"
+                  class="edit-post-btn"
+                  >✏️ Edit</a
+                >
                 <button class="delete-post-btn" data-post-id="<%= post.id %>">
-                  ❌
+                  <span class="delete-icon">❌</span>
                 </button>
               </div>
 

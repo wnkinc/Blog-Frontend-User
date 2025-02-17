@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Post - Tech Trails</title>
+    <title>
+      <%= post ? "Edit Post - Tech Trails" : "Create Post - Tech Trails" %>
+    </title>
     <!-- TinyMCE CDN -->
     <script
       src="https://cdn.tiny.cloud/1/<%= tinyMCEApiKey %>/tinymce/7/tinymce.min.js"
@@ -15,9 +17,9 @@
     <!-- Header -->
     <header class="header">
       <div class="logo">
-        <a href="/dashboard" class="logo"
-          ><img src="/imgs/WK.png" alt="wk logo"
-        /></a>
+        <a href="/dashboard" class="logo">
+          <img src="/imgs/WK.png" alt="wk logo" />
+        </a>
       </div>
       <div class="post-controls">
         <button class="tab-btn" id="preview-tab">Preview</button>
@@ -28,17 +30,24 @@
     <!-- Create Post Container -->
     <main class="create-post-container">
       <form id="create-post-form" action="/create" method="POST">
+        <!-- If editing, include a hidden field with the postSlug -->
+        <% if (post) { %>
+        <input type="hidden" name="postSlug" value="<%= post.slug %>" />
+        <% } %>
+
         <!-- Cover Image Section -->
         <div class="cover-image-container">
           <button type="button" class="add-cover-btn" id="add-cover-btn">
             + Add Cover Image
           </button>
 
-          <!-- File Name Display (Initially Empty) -->
+          <!-- File Name Display (Initially Empty or preloaded) -->
           <span
             id="cover-image-name"
             style="margin-left: 10px; font-weight: bold"
-          ></span>
+          >
+            <%= post && post.coverImage ? "Current Cover Image Loaded" : "" %>
+          </span>
         </div>
 
         <!-- Hidden File Input -->
@@ -50,7 +59,12 @@
         />
 
         <!-- Hidden Input to Store Image URL -->
-        <input type="hidden" name="coverImage" id="cover-image-url" />
+        <input
+          type="hidden"
+          name="coverImage"
+          id="cover-image-url"
+          value="<%= post && post.coverImage ? post.coverImage : '' %>"
+        />
 
         <!-- Post Title Input -->
         <input
@@ -59,11 +73,14 @@
           class="post-title"
           placeholder="Post title..."
           required
+          value="<%= post ? post.title : '' %>"
         />
 
         <!-- Editor Container to Allow Dynamic Height -->
         <div class="editor-container">
-          <textarea id="post-editor" name="content"></textarea>
+          <textarea id="post-editor" name="content">
+<%= post ? post.content : '' %></textarea
+          >
         </div>
 
         <!-- Hidden Input for Status -->
@@ -97,23 +114,16 @@
         plugins: "lists link image code textcolor autosave",
         toolbar:
           "undo redo | bold italic | bullist numlist | link image | code | restoredraft",
-        /* Force editor to use 100% width of its container */
         width: "100%",
-        /* Optional: Let users manually resize the editor from the bottom-right corner */
         resize: true,
         menubar: false,
-
-        // Autosave settings
-        autosave_ask_before_unload: true, // Ask user before leaving if there's unsaved content
-        autosave_interval: "30s", // Save every 30 seconds
-        autosave_retention: "30m", // Retain autosaved data for 30 minutes
-
-        /* Enable automatic image upload */
+        autosave_ask_before_unload: true,
+        autosave_interval: "30s",
+        autosave_retention: "30m",
         images_upload_handler: function (blobInfo) {
           return new Promise((resolve, reject) => {
             const formData = new FormData();
             formData.append("image", blobInfo.blob(), blobInfo.filename());
-
             fetch("http://localhost:4000/create/upload", {
               method: "POST",
               body: formData,
@@ -121,7 +131,7 @@
               .then((response) => response.json())
               .then((data) => {
                 if (data.url) {
-                  resolve(data.url); // Resolve with the image URL
+                  resolve(data.url);
                 } else {
                   reject("Image upload failed");
                 }
@@ -138,18 +148,16 @@
       document
         .getElementById("add-cover-btn")
         .addEventListener("click", function () {
-          document.getElementById("cover-image-input").click(); // Open file picker
+          document.getElementById("cover-image-input").click();
         });
 
       document
         .getElementById("cover-image-input")
         .addEventListener("change", function (event) {
           const file = event.target.files[0];
-
           if (file) {
             const formData = new FormData();
             formData.append("image", file, file.name);
-
             fetch("http://localhost:4000/create/upload", {
               method: "POST",
               body: formData,
@@ -157,8 +165,7 @@
               .then((response) => response.json())
               .then((data) => {
                 if (data.url) {
-                  document.getElementById("cover-image-url").value = data.url; // Store URL in hidden input
-                  // Display the file name
+                  document.getElementById("cover-image-url").value = data.url;
                   document.getElementById("cover-image-name").textContent =
                     file.name;
                 } else {
@@ -173,18 +180,15 @@
       document
         .getElementById("close-btn")
         .addEventListener("click", function () {
-          window.location.href = "/dashboard"; // Redirects to dashboard
+          window.location.href = "/dashboard";
         });
     </script>
     <script>
-      // When the preview button is clicked, set status to "draft" and submit the form.
       document
         .getElementById("preview-tab")
         .addEventListener("click", function (e) {
-          e.preventDefault(); // Prevent any default behavior
-          // Set the post status to draft (same as Save Draft)
+          e.preventDefault();
           setPostStatus("preview");
-          // Submit the form
           document.getElementById("create-post-form").submit();
         });
     </script>

@@ -128,6 +128,7 @@ body {
 .feed {
   display: flex;
   flex-direction: column;
+  min-width: 390px;
 }
 
 .feed-post {
@@ -185,6 +186,42 @@ body {
 .draft {
   background-color: #ecd06f;
 }
+
+.delete-post-btn,
+.edit-post-btn {
+  white-space: nowrap;
+  padding: 5px 10px;
+  background-color: transparent;
+  border: 1px solid #ecd06f;
+  border-radius: 5px;
+  cursor: pointer;
+  /* Optional: Add some margin if needed */
+}
+
+.delete-post-btn {
+  border: 1px solid red;
+}
+
+.edit-post-btn {
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.delete-post-btn {
+  font-size: 14px;
+}
+
+.delete-post-btn:hover,
+.edit-post-btn:hover {
+  background-color: #2779a7;
+  border: 1px solid #2779a7;
+  color: white;
+}
+
+.delete-post-btn:hover .delete-icon {
+  filter: brightness(0) invert(1);
+}
+
 /* ----------------------------------------------------
      Post Author & Meta
   ---------------------------------------------------- */

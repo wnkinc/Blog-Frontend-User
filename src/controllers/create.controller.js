@@ -5,10 +5,31 @@ const FormData = require("form-data");
 
 // Function to load the create post page
 async function loadCreate(req, res, next) {
-  res.render("create", {
-    pageTitle: "Create Post",
-    tinyMCEApiKey: process.env.TINYMCE_API_KEY,
-  });
+  const { postSlug } = req.query; // Check if postSlug is in the URL
+
+  try {
+    let post = null;
+
+    if (postSlug) {
+      // Fetch post details from the backend API
+      const apiUrl = `${process.env.BLOG_API_BASE_URL}/posts/${postSlug}`;
+      const response = await axios.get(apiUrl);
+      // Extract the post object from the response
+      post = response.data.post;
+    }
+
+    res.render("create", {
+      pageTitle: postSlug ? "Edit Post" : "Create Post",
+      tinyMCEApiKey: process.env.TINYMCE_API_KEY,
+      post, // Pass the extracted post object (null if creating a new post)
+    });
+  } catch (error) {
+    console.error(
+      "Error loading post for editing:",
+      error.response?.data || error
+    );
+    next(error);
+  }
 }
 
 // Function to handle post creation (Publish or Save Draft)
