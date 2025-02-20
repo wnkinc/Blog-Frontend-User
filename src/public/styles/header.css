@@ -193,6 +193,10 @@
 }
 
 @media (min-width: 1240px) {
+  .header {
+    padding: 5px 0;
+  }
+
   .navbar {
     max-width: 1240px;
     justify-content: center; /* All items together in the center */
