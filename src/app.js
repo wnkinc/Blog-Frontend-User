@@ -54,6 +54,10 @@ app.use(async (req, res, next) => {
   next();
 });
 
+app.get("/", (req, res) => {
+  res.status(200).send("User frontend is up and running!");
+});
+
 const dashboardRouter = require("./routes/dashboard.routes");
 const profileRouter = require("./routes/profile.routes");
 const createRouter = require("./routes/create.routes");
@@ -86,7 +90,7 @@ app.use((req, res) => {
 /**
  * -------------- Server ----------------
  */
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Blog-Frontend-User - listening on port ${PORT}!`);
 });

