@@ -7,7 +7,10 @@ async function verifyToken(req, res, next) {
     console.log("URL:", `${process.env.BLOG_API_BASE_URL}/auth/verify-token`);
     console.log("Method: GET");
     console.log("Incoming Request to verifyToken - Headers:", req.headers);
-
+    console.log(
+      "Incoming Request to verifyToken - Cookies:",
+      req.headers.cookies
+    );
     // Send a request to your API's verify endpoint
     const response = await axios.get(
       `${process.env.BLOG_API_BASE_URL}/auth/verify-token`,
