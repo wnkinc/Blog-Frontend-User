@@ -173,9 +173,9 @@
 
 /* Adjust emoji size */
 /* .reaction-link span,
-.comment-link span {
-  font-size: 1.1rem;
-} */
+  .comment-link span {
+    font-size: 1.1rem;
+  } */
 
 .post-link {
   display: block;
@@ -264,44 +264,44 @@
 
 /* Notification Badge */
 /* .notification-badge {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  width: 20px;
-  height: 20px;
-  background-color: red;
-  color: white;
-  font-size: 15px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 18px;
-  border-radius: 50%;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  animation: shake-rotate 0.4s ease-in-out infinite;
-  animation-iteration-count: 1;
-  animation-delay: 5s;
-}
-
-@keyframes shake-rotate {
-  0% {
-    transform: translateX(0) rotate(0deg);
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 18px;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    animation: shake-rotate 0.4s ease-in-out infinite;
+    animation-iteration-count: 1;
+    animation-delay: 5s;
   }
-  20% {
-    transform: translateX(-2px) rotate(-12deg);
-  }
-  40% {
-    transform: translateX(2px) rotate(12deg);
-  }
-  60% {
-    transform: translateX(-2px) rotate(-12deg);
-  }
-  80% {
-    transform: translateX(2px) rotate(12deg);
-  }
-  100% {
-    transform: translateX(0) rotate(0deg);
-  }
-} */
+  
+  @keyframes shake-rotate {
+    0% {
+      transform: translateX(0) rotate(0deg);
+    }
+    20% {
+      transform: translateX(-2px) rotate(-12deg);
+    }
+    40% {
+      transform: translateX(2px) rotate(12deg);
+    }
+    60% {
+      transform: translateX(-2px) rotate(-12deg);
+    }
+    80% {
+      transform: translateX(2px) rotate(12deg);
+    }
+    100% {
+      transform: translateX(0) rotate(0deg);
+    }
+  } */
 
 .sprite-animation {
   display: inline-block;
