@@ -8,8 +8,9 @@ const {
   postReactions,
   deletePost,
 } = require("../controllers/post.controller");
+const { userInfo } = require("../middleware/user.info");
 
-router.get("/:slug", getPostBySlug);
+router.get("/:slug", userInfo, getPostBySlug);
 router.post("/:slug/comment", postComment);
 router.post("/:slug/reply", postReply);
 router.post("/reactions", postReactions);

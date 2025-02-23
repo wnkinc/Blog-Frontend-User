@@ -5,10 +5,11 @@ const {
   getUnderConstructionPage,
 } = require("../controllers/dashboard.controller");
 const { verifyToken } = require("../middleware/auth.middleware");
+const { userInfo } = require("../middleware/user.info");
 
 const router = express.Router();
 
-router.get("/", verifyToken, loadDashboard);
+router.get("/", userInfo, verifyToken, loadDashboard);
 router.get("/underConstruction", getUnderConstructionPage);
 
 module.exports = router;
