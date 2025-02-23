@@ -89,57 +89,56 @@ async function createPost(req, res, next) {
 }
 
 // Function to handle TinyMCE image upload
-async function uploadBlob(req, res) {
-  try {
-    console.log("🔥 HIT: Received image upload request at Frontend Server");
+// async function uploadBlob(req, res) {
+//   try {
+//     console.log("🔥 HIT: Received image upload request at Frontend Server");
 
-    const accessToken = req.cookies.access_token;
-    if (!accessToken) {
-      return res.status(401).json({ error: "Unauthorized: No access token." });
-    }
+//     const accessToken = req.cookies.access_token;
+//     if (!accessToken) {
+//       return res.status(401).json({ error: "Unauthorized: No access token." });
+//     }
 
-    console.log("🟢 Access Token:", accessToken);
+//     console.log("🟢 Access Token:", accessToken);
 
-    // ✅ Ensure the request contains an actual file
-    if (!req.file) {
-      console.error("❌ No file received from TinyMCE");
-      return res.status(400).json({ error: "No file uploaded." });
-    }
+//     // ✅ Ensure the request contains an actual file
+//     if (!req.file) {
+//       console.error("❌ No file received from TinyMCE");
+//       return res.status(400).json({ error: "No file uploaded." });
+//     }
 
-    // ✅ Create FormData and append file
-    const formData = new FormData();
-    formData.append("image", req.file.buffer, {
-      filename: req.file.originalname,
-    });
+//     // ✅ Create FormData and append file
+//     const formData = new FormData();
+//     formData.append("image", req.file.buffer, {
+//       filename: req.file.originalname,
+//     });
 
-    console.log("📤 Forwarding FormData to Backend API:");
+//     console.log("📤 Forwarding FormData to Backend API:");
 
-    // ✅ DO NOT manually set Content-Type, let Axios handle it
-    const response = await axios.post(
-      `${process.env.BLOG_API_BASE_URL}/posts/upload`,
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          ...formData.getHeaders(), // ✅ Ensures boundary is set correctly
-        },
-      }
-    );
+//     // ✅ DO NOT manually set Content-Type, let Axios handle it
+//     const response = await axios.post(
+//       `${process.env.BLOG_API_BASE_URL}/posts/upload`,
+//       formData,
+//       {
+//         headers: {
+//           Authorization: `Bearer ${accessToken}`,
+//           ...formData.getHeaders(), // ✅ Ensures boundary is set correctly
+//         },
+//       }
+//     );
 
-    console.log("✅ Backend Response:", response.data);
-    res.json({ url: response.data.imageUrl });
-  } catch (error) {
-    console.error("❌ Error uploading image:", error.message);
-    console.error(
-      "🔴 Error Response:",
-      error.response ? error.response.data : "No response received"
-    );
-    res.status(500).json({ error: "Image upload failed." });
-  }
-}
+//     console.log("✅ Backend Response:", response.data);
+//     res.json({ url: response.data.imageUrl });
+//   } catch (error) {
+//     console.error("❌ Error uploading image:", error.message);
+//     console.error(
+//       "🔴 Error Response:",
+//       error.response ? error.response.data : "No response received"
+//     );
+//     res.status(500).json({ error: "Image upload failed." });
+//   }
+// }
 
 module.exports = {
   loadCreate,
   createPost,
-  uploadBlob,
 };
