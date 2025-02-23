@@ -112,14 +112,11 @@ async function uploadBlob(req, res) {
       filename: req.file.originalname,
     });
 
-    console.log(
-      "📤 Forwarding FormData to Backend API:",
-      "http://localhost:8080/posts/upload"
-    );
+    console.log("📤 Forwarding FormData to Backend API:");
 
     // ✅ DO NOT manually set Content-Type, let Axios handle it
     const response = await axios.post(
-      "http://localhost:8080/posts/upload",
+      `${process.env.BLOG_API_BASE_URL}/posts/upload`,
       formData,
       {
         headers: {
