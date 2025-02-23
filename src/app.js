@@ -68,6 +68,10 @@ app.use("/dashboard", dashboardRouter);
 app.use("/profile", profileRouter);
 app.use("/post", postRoutes);
 
+app.get("*", (req, res) => {
+  res.render("partials/404", { title: "Page Not Found" });
+});
+
 /**
  * -------------- Error handling ----------------
  */

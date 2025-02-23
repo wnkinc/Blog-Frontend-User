@@ -3,6 +3,7 @@
 
 # Other common files to ignore
 node_modules
+*.zip
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
