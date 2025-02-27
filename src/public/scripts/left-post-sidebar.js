@@ -22,9 +22,13 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".reshare-button").forEach((button) => {
     button.addEventListener("click", function () {
-      const postUrl = `${window.location.origin}${button.getAttribute(
-        "data-url"
-      )}`;
+      const dataUrl = button.getAttribute("data-url");
+      let postUrl;
+      if (dataUrl.startsWith("http://") || dataUrl.startsWith("https://")) {
+        postUrl = dataUrl;
+      } else {
+        postUrl = `${window.location.origin}${dataUrl}`;
+      }
 
       // Create and show the custom modal
       showCopyModal(postUrl);

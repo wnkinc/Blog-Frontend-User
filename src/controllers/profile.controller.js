@@ -21,11 +21,23 @@ async function loadProfile(req, res, next) {
     const userData = response.data.user; // Get user data from the response
     console.log("User Data Response:", response.data);
 
+    // Add a total reactions count per post in the profile data
+    if (userData.posts && Array.isArray(userData.posts)) {
+      userData.posts = userData.posts.map((post) => {
+        // Default to an empty array if post.reactions is undefined
+        const reactionsCount = (post.reactions || []).reduce(
+          (sum, reaction) => sum + reaction.count,
+          0
+        );
+        return { ...post, reactionsCount };
+      });
+    }
+
     // Render the profile view with the fetched user data and posts
     res.render("profile", {
       title: "Profile",
       user: userData,
-      posts: userData.posts, // Now each post includes 'author' and 'comments'
+      posts: userData.posts, // Each post now includes the 'reactionsCount'
     });
   } catch (error) {
     console.error("Error loading profile:", error.message);
